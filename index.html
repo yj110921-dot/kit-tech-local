@@ -114,6 +114,10 @@
     justify-content: center;
     padding: 132px 0 10vh;
     pointer-events: none;
+    opacity: 1 !important;
+    transform: none !important;
+    translate: none !important;
+    transition: none !important;
   }
 
   .local-moving-poster-video {
@@ -124,6 +128,20 @@
     max-height: none;
     object-fit: contain;
     background: #fff;
+    opacity: 1 !important;
+    transform: none !important;
+    translate: none !important;
+    transition: none !important;
+  }
+
+  .local-moving-poster-stage.local-reveal,
+  .local-moving-poster-stage.local-reveal.is-revealed,
+  .local-moving-poster-video.local-reveal,
+  .local-moving-poster-video.local-reveal.is-revealed {
+    opacity: 1 !important;
+    transform: none !important;
+    translate: none !important;
+    transition: none !important;
   }
 
   #container .local-green-cover {
@@ -1307,9 +1325,11 @@
 
         var stage = document.createElement("div");
         stage.className = "local-moving-poster-stage";
+        stage.dataset.noReveal = "true";
 
         var video = document.createElement("video");
         video.className = "local-moving-poster-video";
+        video.dataset.noReveal = "true";
         video.autoplay = true;
         video.muted = true;
         video.loop = true;
@@ -1343,8 +1363,8 @@
       var progress = 1 - Math.min(Math.max(rect.top / viewportHeight, 0), 1);
       var isMobile = window.matchMedia("(max-width: 799px)").matches;
       var isTablet = window.matchMedia("(min-width: 800px) and (max-width: 1279px)").matches;
-      var delay = isMobile ? 0.34 : isTablet ? 0.2 : 0;
-      var amount = isMobile ? -80 : isTablet ? -120 : -240;
+      var delay = isMobile ? 0.12 : isTablet ? 0.08 : 0;
+      var amount = isMobile ? -280 : isTablet ? -260 : -420;
       var lift = Math.round(Math.max(progress - delay, 0) * amount);
       greenSection.style.setProperty("--green-cover-lift", lift + "px");
     }

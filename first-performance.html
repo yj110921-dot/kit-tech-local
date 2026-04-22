@@ -215,6 +215,31 @@
       padding-left: 1.1em;
     }
 
+    .hero-booking-button {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-width: clamp(78px, 7vw, 104px);
+      min-height: clamp(29px, 2.7vw, 38px);
+      margin-top: 22px;
+      padding: 8px 18px;
+      border-radius: 8px;
+      background: #424242;
+      color: #ffffff;
+      font-family: "Noto Sans KR:Regular", "Noto Sans KR", sans-serif;
+      font-size: clamp(11px, 0.95vw, 14px);
+      line-height: 1;
+      text-decoration: none;
+      cursor: pointer;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    .hero-booking-button:hover,
+    .hero-booking-button:focus-visible {
+      background: #828282;
+      outline: none;
+    }
+
     p {
       margin: 0;
       font-size: clamp(12px, 1.05vw, 15px);
@@ -869,6 +894,7 @@
           </p>
           <p>• 장소: 연극원 상자무대 2</p>
         </div>
+        <a class="hero-booking-button" href="https://booking.naver.com/booking/12/bizes/224803/items/7612173" aria-label="로미오와 줄리엣, 헤파이스토스 예매하기">예매하기</a>
       </div>
     </section>
 
