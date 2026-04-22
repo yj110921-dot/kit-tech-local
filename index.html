@@ -1228,15 +1228,25 @@
     var instagramUrl = "https://www.instagram.com/karts_rojul?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw%3D%3D";
     var firstBookingUrl = "https://booking.naver.com/booking/12/bizes/224803/items/7612173";
 
+    var userHasStartedScroll = false;
+
+    function markUserScrollIntent() {
+      userHasStartedScroll = true;
+    }
+
+    ["wheel", "touchstart", "pointerdown", "keydown"].forEach(function (eventName) {
+      window.addEventListener(eventName, markUserScrollIntent, { passive: true, once: true });
+    });
+
     function resetHomeScroll() {
-      if (window.location.hash) return;
+      if (window.location.hash || userHasStartedScroll) return;
       window.scrollTo(0, 0);
       document.documentElement.scrollTop = 0;
       document.body.scrollTop = 0;
     }
 
     function lockInitialHomeTop() {
-      if (window.location.hash) return;
+      if (window.location.hash || userHasStartedScroll) return;
       resetHomeScroll();
       [0, 40, 140, 360, 720].forEach(function (delay) {
         window.setTimeout(resetHomeScroll, delay);
