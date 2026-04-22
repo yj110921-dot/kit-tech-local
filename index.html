@@ -247,7 +247,7 @@
   #container .local-reveal {
     opacity: 0 !important;
     translate: 0 34px;
-    transition: opacity 520ms ease, translate 520ms cubic-bezier(0.22, 1, 0.36, 1);
+    transition: opacity 460ms ease, translate 460ms cubic-bezier(0.22, 1, 0.36, 1);
     will-change: opacity, translate;
   }
 
@@ -689,6 +689,13 @@
     box-sizing: border-box !important;
   }
 
+  #container .local-ticket-contact .local-reveal,
+  #container .local-ticket-contact .local-reveal.is-revealed {
+    opacity: 1 !important;
+    translate: none !important;
+    transform: none;
+  }
+
   #container .local-ticket-contact,
   #container .local-ticket-contact * {
     box-sizing: border-box;
@@ -709,29 +716,31 @@
   }
 
   #container .local-contact-section {
-    margin-top: clamp(170px, 18vw, 260px);
+    margin-top: clamp(210px, 22vw, 330px);
+    padding-bottom: clamp(80px, 8vw, 130px);
   }
 
   #container .local-section-title {
     margin: 0 0 clamp(58px, 7vw, 86px);
     color: #000;
-    font-family: "Noto Sans KR:Bold", "Noto Sans KR", sans-serif;
-    font-size: clamp(25px, 3vw, 39px);
-    font-weight: 700;
-    line-height: 1.1;
+    font-family: "Noto Sans KR:Medium", "Noto Sans KR", sans-serif;
+    font-size: clamp(18px, 2vw, 26px);
+    font-weight: 500;
+    line-height: 1;
   }
 
   #container .local-ticket-grid {
     display: grid;
     grid-template-columns: repeat(3, minmax(0, 1fr));
-    align-items: start;
+    align-items: stretch;
     gap: clamp(38px, 6vw, 88px);
   }
 
   #container .local-ticket-card {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+    display: grid;
+    grid-template-rows: clamp(92px, 9.4vw, 128px) minmax(3.3em, auto) auto;
+    justify-items: center;
+    align-items: start;
     min-width: 0;
   }
 
@@ -739,7 +748,8 @@
     width: clamp(104px, 11vw, 146px);
     height: clamp(92px, 9.4vw, 128px);
     object-fit: contain;
-    margin: 0 0 clamp(18px, 2vw, 28px);
+    align-self: end;
+    margin: 0;
     animation: localFloat 5.6s ease-in-out infinite;
   }
 
@@ -758,25 +768,43 @@
     margin: 0;
     color: #000;
     font-family: "Noto Sans KR:Medium", "Noto Sans KR", sans-serif;
-    font-size: clamp(13px, 1.25vw, 17px);
+    font-size: calc(clamp(13px, 1.25vw, 17px) + 2pt);
     font-weight: 500;
     line-height: 1.35;
     word-break: keep-all;
+  }
+
+  #container .local-ticket-title {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 3.3em;
+    margin-top: clamp(18px, 2vw, 28px);
+    text-align: center;
   }
 
   #container .local-ticket-date,
   #container .local-ticket-button,
   #container .local-ticket-guide p {
     font-family: "Noto Sans KR:Regular", "Noto Sans KR", sans-serif;
-    font-size: clamp(10px, 0.92vw, 13px);
+    font-size: calc(clamp(10px, 0.92vw, 13px) + 2pt);
     font-weight: 400;
     line-height: 1.65;
     word-break: keep-all;
   }
 
   #container .local-ticket-date {
-    margin: clamp(8px, 0.9vw, 12px) 0 clamp(14px, 1.5vw, 20px);
+    margin: 0;
     color: rgba(0, 0, 0, 0.5);
+  }
+
+  #container .local-ticket-action-row {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: clamp(20px, 2vw, 30px);
+    margin-top: clamp(16px, 1.8vw, 26px);
   }
 
   #container .local-ticket-button {
@@ -787,7 +815,7 @@
     min-height: clamp(29px, 2.7vw, 38px);
     padding: 8px 18px;
     border: 0;
-    border-radius: 4px;
+    border-radius: 8px;
     background: #424242;
     color: #ffffff;
     line-height: 1;
@@ -804,21 +832,22 @@
 
   #container .local-ticket-guide {
     position: relative;
-    width: min(500px, 68%);
-    min-height: clamp(170px, 18vw, 250px);
-    margin: clamp(82px, 10vw, 130px) auto 0;
+    width: min(820px, calc(100vw - 64px));
+    min-height: clamp(340px, 34vw, 470px);
+    margin: clamp(108px, 12vw, 168px) auto 0;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
     padding: clamp(28px, 3.2vw, 44px);
+    overflow: visible;
   }
 
   #container .local-ticket-guide::before {
     content: "";
     position: absolute;
     inset: 0;
-    background: url("./_assets/local/ticket-oval.png") center / contain no-repeat;
+    background: url("./_assets/local/ticket-oval.png") center / 100% 100% no-repeat;
     z-index: 0;
     pointer-events: none;
   }
@@ -835,17 +864,22 @@
   #container .local-ticket-guide p {
     margin: 0;
     color: #000;
+    line-height: 2.475;
   }
 
   #container .local-ticket-guide p + p {
     margin-top: clamp(5px, 0.5vw, 8px);
   }
 
+  #container .local-ticket-guide + .local-ticket-guide {
+    margin-top: clamp(72px, 8vw, 116px);
+  }
+
   #container .local-contact-text {
     margin: 0 0 clamp(22px, 2.6vw, 34px);
     color: #000;
     font-family: "Noto Sans KR:Regular", "Noto Sans KR", sans-serif;
-    font-size: clamp(12px, 1vw, 15px);
+    font-size: calc(clamp(12px, 1vw, 15px) + 2pt);
     line-height: 1.45;
   }
 
@@ -857,7 +891,7 @@
   }
 
   #container .local-contact-arrow {
-    width: clamp(18px, 2.1vw, 28px);
+    width: clamp(9px, 1.05vw, 14px);
     height: auto;
     animation: localPoint 1.35s ease-in-out infinite;
   }
@@ -876,12 +910,12 @@
 
   @keyframes localFloat {
     0%, 100% { transform: translateY(0); }
-    50% { transform: translateY(-13px); }
+    50% { transform: translateY(-24px); }
   }
 
   @keyframes localPoint {
-    0%, 100% { transform: translateY(-3px); }
-    50% { transform: translateY(8px); }
+    0%, 100% { transform: translateY(-4px); }
+    50% { transform: translateY(10px); }
   }
 
   @media (min-width: 800px) and (max-width: 1279px) {
@@ -896,6 +930,11 @@
     #container .local-schedule-heading {
       margin-bottom: 42px;
       font-size: 23px;
+    }
+
+    #container .local-section-title {
+      font-size: 23px;
+      font-weight: 500;
     }
 
     #container .local-schedule-note {
@@ -916,7 +955,7 @@
     }
 
     #container .local-ticket-contact {
-      padding: 88px 54px 150px !important;
+      padding: 88px 54px 210px !important;
     }
 
     #container .local-ticket-section,
@@ -929,8 +968,9 @@
     }
 
     #container .local-ticket-guide {
-      width: min(440px, 72%);
-      margin-top: 92px;
+      width: min(704px, calc(100vw - 72px));
+      min-height: 390px;
+      margin-top: 120px;
     }
   }
 
@@ -1001,7 +1041,7 @@
     }
 
     #container .local-ticket-contact {
-      padding: 78px 38px 120px !important;
+      padding: 78px 38px 190px !important;
     }
 
     #container .local-ticket-section,
@@ -1012,6 +1052,7 @@
     #container .local-section-title {
       margin-bottom: 60px;
       font-size: 18px;
+      font-weight: 500;
     }
 
     #container .local-ticket-grid {
@@ -1019,6 +1060,7 @@
       flex-direction: column;
       gap: 88px;
       order: 2;
+      align-items: stretch;
     }
 
     #container .local-ticket-art {
@@ -1027,51 +1069,84 @@
       margin-bottom: 20px;
     }
 
+    #container .local-ticket-card {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      width: 112px;
+    }
+
+    #container .local-ticket-title {
+      min-height: 0;
+      margin-top: 0;
+    }
+
+    #container .local-ticket-card:nth-child(1),
+    #container .local-ticket-card:nth-child(3) {
+      align-self: flex-start;
+      margin-left: 16px;
+    }
+
     #container .local-ticket-card:nth-child(2) {
-      transform: translateX(46px);
+      align-self: flex-end;
+      margin-right: 16px;
+      transform: none;
     }
 
     #container .local-ticket-card:nth-child(3) {
-      transform: translateX(-48px);
+      transform: none;
     }
 
     #container .local-ticket-title,
     #container .local-ticket-guide-title {
-      font-size: 10px;
+      font-size: calc(10px + 2pt);
     }
 
     #container .local-ticket-date,
     #container .local-ticket-button,
     #container .local-ticket-guide p {
-      font-size: 7px;
+      font-size: calc(7px + 2pt);
+    }
+
+    #container .local-ticket-action-row {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      margin-top: 10px;
     }
 
     #container .local-ticket-button {
       min-width: 58px;
       min-height: 22px;
       padding: 6px 12px;
-      border-radius: 3px;
+      border-radius: 6px;
     }
 
     #container .local-ticket-guide {
       order: 1;
-      width: min(230px, 100%);
-      min-height: 138px;
-      margin: 0 auto 70px;
+      width: min(330px, calc(100vw - 28px));
+      min-height: 244px;
+      margin: 16px auto 86px;
       padding: 22px 26px;
     }
 
+    #container .local-ticket-guide + .local-ticket-guide {
+      margin-top: -44px;
+      margin-bottom: 92px;
+    }
+
     #container .local-contact-section {
-      margin-top: 160px;
+      margin-top: 210px;
+      padding-bottom: 90px;
     }
 
     #container .local-contact-text {
-      font-size: 8px;
+      font-size: calc(8px + 2pt);
       margin-bottom: 18px;
     }
 
     #container .local-contact-arrow {
-      width: 18px;
+      width: 9px;
     }
 
     #container .local-contact-instagram {
@@ -1109,6 +1184,14 @@
       document.body.scrollTop = 0;
     }
 
+    function lockInitialHomeTop() {
+      if (window.location.hash) return;
+      resetHomeScroll();
+      [0, 40, 140, 360, 720].forEach(function (delay) {
+        window.setTimeout(resetHomeScroll, delay);
+      });
+    }
+
     function easeOutSticky(t) {
       return 1 - Math.pow(1 - t, 4);
     }
@@ -1133,10 +1216,10 @@
       window.requestAnimationFrame(step);
     }
 
-    resetHomeScroll();
-    window.requestAnimationFrame(resetHomeScroll);
-    window.addEventListener("load", resetHomeScroll, { once: true });
-    window.addEventListener("pageshow", resetHomeScroll);
+    lockInitialHomeTop();
+    window.requestAnimationFrame(lockInitialHomeTop);
+    window.addEventListener("load", lockInitialHomeTop, { once: true });
+    window.addEventListener("pageshow", lockInitialHomeTop);
 
     function isVisible(element) {
       return !!(element && element.offsetParent !== null);
@@ -1154,12 +1237,18 @@
       });
     }
 
-    function scrollToElement(element) {
+    function scrollToElement(element, extraGap) {
       if (!element) return;
       var header = Array.prototype.slice.call(document.querySelectorAll("header")).find(isVisible);
-      var offset = header ? header.getBoundingClientRect().height + 18 : 0;
+      var offset = header ? header.getBoundingClientRect().height + (extraGap || 18) : (extraGap || 0);
       var top = element.getBoundingClientRect().top + window.pageYOffset - offset;
       window.scrollTo({ top: Math.max(top, 0), behavior: "smooth" });
+    }
+
+    function ticketHeaderGap() {
+      if (window.matchMedia("(max-width: 799px)").matches) return 30;
+      if (window.matchMedia("(max-width: 1279px)").matches) return 20;
+      return 18;
     }
 
     function scrollToSchedule(element) {
@@ -1180,12 +1269,16 @@
       } else if (target === "schedule") {
         element = root.querySelector(".local-schedule-green, .css-gbim6l, .css-u21bc9, .css-s4m76p");
       } else if (target === "ticket") {
-        element = root.querySelector(".local-ticket-section");
+        element = root.querySelector(".local-ticket-section .local-section-title, .local-ticket-section");
       } else if (target === "contact") {
         element = root.querySelector(".local-contact-section");
       }
       if (target === "schedule") {
         scrollToSchedule(element);
+        return;
+      }
+      if (target === "ticket") {
+        scrollToElement(element, ticketHeaderGap());
         return;
       }
       scrollToElement(element);
@@ -1586,20 +1679,26 @@
             '<article class="local-ticket-card local-reveal">' +
               '<img class="local-ticket-art" src="./_assets/local/ticket-rojulhe-element.png" alt="로미오와 줄리엣, 헤파이스토스 이미지 요소">' +
               '<h3 class="local-ticket-title">로미오와 줄리엣, 헤파이스토스</h3>' +
-              '<p class="local-ticket-date">4월 24일 20:00 예매 오픈</p>' +
-              '<a class="local-ticket-button" href="' + firstBookingUrl + '" aria-label="로미오와 줄리엣, 헤파이스토스 예매하기">예매하기</a>' +
+              '<div class="local-ticket-action-row">' +
+                '<p class="local-ticket-date">4월 24일 20:00 예매 오픈</p>' +
+                '<a class="local-ticket-button" href="' + firstBookingUrl + '" aria-label="로미오와 줄리엣, 헤파이스토스 예매하기">예매하기</a>' +
+              '</div>' +
             '</article>' +
             '<article class="local-ticket-card local-reveal">' +
               '<img class="local-ticket-art" src="./_assets/local/ticket-garden.png" alt="로미오와 줄리엣 아님 이미지 요소">' +
               '<h3 class="local-ticket-title">로미오와 줄리엣 아님</h3>' +
-              '<p class="local-ticket-date">4월 23일 예매 오픈</p>' +
-              '<button class="local-ticket-button" type="button" data-ticket-pending="true">예매하기</button>' +
+              '<div class="local-ticket-action-row">' +
+                '<p class="local-ticket-date">4월 23일 예매 오픈</p>' +
+                '<button class="local-ticket-button" type="button" data-ticket-pending="true">예매하기</button>' +
+              '</div>' +
             '</article>' +
             '<article class="local-ticket-card local-reveal">' +
               '<img class="local-ticket-art" src="./_assets/local/ticket-garden.png" alt="로미오와 줄리엣 3 이미지 요소">' +
               '<h3 class="local-ticket-title">로미오와 줄리엣 3</h3>' +
-              '<p class="local-ticket-date">4월 25일 예매 오픈</p>' +
-              '<button class="local-ticket-button" type="button" data-ticket-pending="true">예매하기</button>' +
+              '<div class="local-ticket-action-row">' +
+                '<p class="local-ticket-date">4월 25일 예매 오픈</p>' +
+                '<button class="local-ticket-button" type="button" data-ticket-pending="true">예매하기</button>' +
+              '</div>' +
             '</article>' +
           '</div>' +
           '<div class="local-ticket-guide local-reveal">' +
@@ -1798,6 +1897,11 @@
       window.setTimeout(function () {
         scrollToMenuTarget(window.location.hash.replace("#", ""));
       }, 120);
+      if (window.location.hash === "#ticket") {
+        window.setTimeout(function () {
+          scrollToMenuTarget("ticket");
+        }, 520);
+      }
     }
     updateGreenCoverMotion();
     window.addEventListener("scroll", updateGreenCoverMotion, { passive: true });
