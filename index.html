@@ -668,7 +668,7 @@
     top: calc((var(--row) - 1) * var(--row-step) + var(--cell) + clamp(3px, 0.35vw, 6px));
     width: calc((var(--label-end, var(--end)) - var(--label-start, var(--start))) * 100% / 7);
     color: #424242;
-    font-size: clamp(8px, 0.78vw, 11px);
+    font-size: calc(clamp(8px, 0.78vw, 11px) + 2pt);
     font-weight: 500;
     line-height: 1.15;
     text-align: center;
@@ -712,7 +712,7 @@
   #container .local-ticket-section {
     display: flex;
     flex-direction: column;
-    align-items: stretch;
+    align-items: center;
   }
 
   #container .local-contact-section {
@@ -733,6 +733,7 @@
     display: grid;
     grid-template-columns: repeat(3, minmax(0, 1fr));
     align-items: stretch;
+    width: 100%;
     gap: clamp(38px, 6vw, 88px);
   }
 
@@ -835,12 +836,14 @@
     width: min(820px, calc(100vw - 64px));
     min-height: clamp(340px, 34vw, 470px);
     margin: clamp(108px, 12vw, 168px) auto 0;
+    align-self: center;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
     padding: clamp(28px, 3.2vw, 44px);
     overflow: visible;
+    text-align: center;
   }
 
   #container .local-ticket-guide::before {
@@ -859,12 +862,16 @@
 
   #container .local-ticket-guide-title {
     margin-bottom: clamp(14px, 1.6vw, 22px);
+    width: 100%;
+    text-align: center;
   }
 
   #container .local-ticket-guide p {
     margin: 0;
+    width: min(100%, 720px);
     color: #000;
     line-height: 2.475;
+    text-align: center;
   }
 
   #container .local-ticket-guide p + p {
@@ -1037,7 +1044,7 @@
 
     #container .local-event-label {
       top: calc((var(--row) - 1) * var(--row-step) + var(--cell) + 2px);
-      font-size: 6px;
+      font-size: calc(6px + 2pt);
     }
 
     #container .local-ticket-contact {
@@ -1126,8 +1133,13 @@
       order: 1;
       width: min(330px, calc(100vw - 28px));
       min-height: 244px;
-      margin: 16px auto 86px;
+      margin: 16px 0 86px 50%;
       padding: 22px 26px;
+      align-self: flex-start;
+    }
+
+    #container .local-ticket-contact .local-ticket-guide {
+      transform: translateX(-50%) !important;
     }
 
     #container .local-ticket-guide + .local-ticket-guide {
@@ -1688,7 +1700,7 @@
               '<img class="local-ticket-art" src="./_assets/local/ticket-garden.png" alt="로미오와 줄리엣 아님 이미지 요소">' +
               '<h3 class="local-ticket-title">로미오와 줄리엣 아님</h3>' +
               '<div class="local-ticket-action-row">' +
-                '<p class="local-ticket-date">4월 23일 예매 오픈</p>' +
+                '<p class="local-ticket-date">5월 23일 예매 오픈</p>' +
                 '<button class="local-ticket-button" type="button" data-ticket-pending="true">예매하기</button>' +
               '</div>' +
             '</article>' +
@@ -1696,7 +1708,7 @@
               '<img class="local-ticket-art" src="./_assets/local/ticket-garden.png" alt="로미오와 줄리엣 3 이미지 요소">' +
               '<h3 class="local-ticket-title">로미오와 줄리엣 3</h3>' +
               '<div class="local-ticket-action-row">' +
-                '<p class="local-ticket-date">4월 25일 예매 오픈</p>' +
+                '<p class="local-ticket-date">5월 25일 예매 오픈</p>' +
                 '<button class="local-ticket-button" type="button" data-ticket-pending="true">예매하기</button>' +
               '</div>' +
             '</article>' +
@@ -1704,10 +1716,17 @@
           '<div class="local-ticket-guide local-reveal">' +
             '<h3 class="local-ticket-guide-title">예매 안내</h3>' +
             '<p>- 본 공연은 무료이며, 전석 자유석입니다.</p>' +
-            '<p>- 티켓 정원은 1인 4장 공연 관람 가능합니다.</p>' +
-            '<p>- 티켓 수령은 공연 시작 40분 전부터 가능합니다.</p>' +
-            '<p>- 티켓 수령 시 본인 확인을 위해 신분증 혹은 학생증 지참해 주시기 바랍니다.</p>' +
-            '<p>- 공연 시작 이후에는 입장이 제한될 수 있습니다.</p>' +
+            '<p>- 학내 구성원 및 외부 관객 모두 관람 가능합니다.</p>' +
+            '<p>- 티켓 수령은 공연 시작 40분 전부터 5분 전까지 가능하며, 타인 양도는 불가능합니다.</p>' +
+            '<p>- 티켓 수령 시 본인 확인을 위해 신분증 혹은 학생증을 지참해주시기 바랍니다.</p>' +
+            '<p>- 증빙 서류 미지참 시 티켓 수령 및 관람이 제한될 수 있습니다.</p>' +
+          '</div>' +
+          '<div class="local-ticket-guide local-reveal">' +
+            '<h3 class="local-ticket-guide-title">현장 예매 안내</h3>' +
+            '<p>- 사전 예매 마감 후 잔여석에 한하여 공연 당일 현장 예매를 운영합니다.</p>' +
+            '<p>- 공연 시작 1시간 전부터 본인에 한해 대기 명단을 작성할 수 있습니다.</p>' +
+            '<p>- 공연 시작 5분 전부터 순차적으로 호명하며,</p>' +
+            '<p>호출 시 부재중이시면 다음 순서로 넘어갑니다.</p>' +
           '</div>' +
         '</section>' +
         '<section class="local-contact-section" id="contact" aria-label="문의하기">' +
