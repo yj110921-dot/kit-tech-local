@@ -933,9 +933,30 @@
     -webkit-tap-highlight-color: transparent;
   }
 
+  #container .local-site-footer {
+    width: min(720px, 100%);
+    margin: clamp(84px, 10vw, 140px) auto 0;
+    padding-bottom: clamp(28px, 4vw, 56px);
+    color: rgba(0, 0, 0, 0.55);
+    font-family: "Noto Sans KR:Regular", "Noto Sans KR", sans-serif;
+    font-size: clamp(10px, 0.88vw, 13px);
+    font-weight: 400;
+    line-height: 1.75;
+    text-align: center;
+    word-break: keep-all;
+  }
+
+  #container .local-site-footer p {
+    margin: 0;
+  }
+
+  #container .local-site-footer p + p {
+    margin-top: 18px;
+  }
+
   @keyframes localFloat {
     0%, 100% { transform: translateY(0); }
-    50% { transform: translateY(-24px); }
+    50% { transform: translateY(-32px); }
   }
 
   @keyframes localPoint {
@@ -1275,10 +1296,24 @@
       window.scrollTo({ top: Math.max(top, 0), behavior: "smooth" });
     }
 
+    function scrollToElementCenter(element, extraDown) {
+      if (!element) return;
+      var rect = element.getBoundingClientRect();
+      var viewportHeight = window.innerHeight || document.documentElement.clientHeight;
+      var top = rect.top + window.pageYOffset - ((viewportHeight - rect.height) / 2) + (extraDown || 0);
+      window.scrollTo({ top: Math.max(top, 0), behavior: "smooth" });
+    }
+
     function ticketHeaderGap() {
-      if (window.matchMedia("(max-width: 799px)").matches) return 30;
-      if (window.matchMedia("(max-width: 1279px)").matches) return 20;
-      return 18;
+      if (window.matchMedia("(max-width: 799px)").matches) return 92;
+      if (window.matchMedia("(max-width: 1279px)").matches) return 150;
+      return 148;
+    }
+
+    function contactDownOffset() {
+      if (window.matchMedia("(max-width: 799px)").matches) return 34;
+      if (window.matchMedia("(max-width: 1279px)").matches) return -96;
+      return -108;
     }
 
     function scrollToSchedule(element) {
@@ -1301,7 +1336,7 @@
       } else if (target === "ticket") {
         element = root.querySelector(".local-ticket-section .local-section-title, .local-ticket-section");
       } else if (target === "contact") {
-        element = root.querySelector(".local-contact-section");
+        element = root.querySelector(".local-contact-section .local-contact-stack") || root.querySelector(".local-contact-section");
       }
       if (target === "schedule") {
         scrollToSchedule(element);
@@ -1309,6 +1344,10 @@
       }
       if (target === "ticket") {
         scrollToElement(element, ticketHeaderGap());
+        return;
+      }
+      if (target === "contact") {
+        scrollToElementCenter(element, contactDownOffset());
         return;
       }
       scrollToElement(element);
@@ -1759,6 +1798,10 @@
             '</a>' +
           '</div>' +
         '</section>' +
+        '<footer class="local-site-footer" aria-label="사이트 정보">' +
+          '<p>Presented by Korea National University of Arts, School of Drama<br>Website designed &amp; developed by YEJIN YOON</p>' +
+          '<p>© 2026 All rights reserved.</p>' +
+        '</footer>' +
       '</section>';
     }
 
