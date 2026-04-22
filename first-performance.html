@@ -1,0 +1,1129 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>로미오와 줄리엣, 헤파이스토스</title>
+  <style>
+    :root {
+      --ink: #111;
+      --paper: #f7f2f1;
+      --pink: #f3c8cd;
+      --rose: #ec8d98;
+      --line: rgba(0, 0, 0, 0.1);
+      --header-height: 106px;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      margin: 0;
+      color: var(--ink);
+      background: #fff;
+      font-family: "Helvetica Neue", Arial, system-ui, sans-serif;
+      letter-spacing: 0;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    .page-header {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 9999;
+      width: 100%;
+      height: var(--header-height);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 13px 28px;
+      background: rgba(255, 255, 255, 0.2);
+      box-shadow: 0 4px 5px rgba(0, 0, 0, 0.25);
+    }
+
+    .site-logo {
+      display: block;
+      width: 287.485px;
+      height: 74px;
+      cursor: pointer;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    .site-logo picture,
+    .menu-button picture,
+    .site-logo img,
+    .menu-button img {
+      display: block;
+      width: 100%;
+      height: 100%;
+    }
+
+    .menu-button {
+      width: 49px;
+      height: 46px;
+      display: flex;
+      align-items: center;
+      justify-content: flex-end;
+      padding: 0;
+      border: 0;
+      background: transparent;
+      cursor: pointer;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    .menu-button picture {
+      width: 42.275px;
+      height: 46.246px;
+    }
+
+    .local-site-menu {
+      position: fixed;
+      top: 72px;
+      right: clamp(24px, 5vw, 72px);
+      z-index: 10001;
+      display: grid;
+      min-width: min(198px, calc(100vw - 48px));
+      padding: 8px 0;
+      border: 1px solid rgba(0, 0, 0, 0.12);
+      border-radius: 9px;
+      background: rgba(238, 238, 238, 0.96);
+      box-shadow: 2px 4px 4px rgba(0, 0, 0, 0.18);
+      opacity: 0;
+      transform: translateY(-8px);
+      pointer-events: none;
+      transition: opacity 180ms ease, transform 180ms ease;
+      backdrop-filter: blur(10px);
+    }
+
+    .local-site-menu.is-open {
+      opacity: 1;
+      transform: translateY(0);
+      pointer-events: auto;
+    }
+
+    .local-site-menu a {
+      display: block;
+      padding: 11px 18px;
+      color: #111;
+      font-family: "Noto Sans KR:Regular", "Inter:Medium", sans-serif;
+      font-size: clamp(11px, 1.7vw, 15px);
+      line-height: 1.2;
+      letter-spacing: 0;
+      text-align: center;
+      white-space: nowrap;
+    }
+
+    .local-site-menu a:hover,
+    .local-site-menu a:focus-visible {
+      background: #828282;
+      color: #fff;
+      outline: none;
+    }
+
+    .hero {
+      position: relative;
+      overflow: hidden;
+      min-height: clamp(430px, 50vw, 680px);
+      display: grid;
+      grid-template-columns: minmax(272px, 510px) minmax(280px, 470px);
+      align-items: center;
+      justify-content: center;
+      gap: clamp(42px, 7vw, 92px);
+      padding: calc(var(--header-height) + clamp(48px, 6vw, 86px)) clamp(28px, 7vw, 110px) clamp(64px, 8vw, 116px);
+      background:
+        linear-gradient(rgba(243, 200, 205, 0.72), rgba(243, 200, 205, 0.72)),
+        linear-gradient(135deg, rgba(255,255,255,0.18) 0 18%, transparent 18% 100%),
+        linear-gradient(35deg, transparent 0 22%, rgba(255,255,255,0.22) 22% 38%, transparent 38% 100%),
+        linear-gradient(115deg, rgba(213, 92, 104, 0.22) 0 16%, transparent 16% 100%),
+        conic-gradient(from 28deg at 20% 35%, #f7d3d8, #eeaab2, #f4d1d4, #e898a3, #f8d8db, #eeadb6, #f7d3d8);
+      background-size: cover, 320px 320px, 280px 280px, 360px 360px, cover;
+      background-position: center;
+    }
+
+    .hero::before {
+      content: "";
+      position: absolute;
+      inset: -40px;
+      background: url("./_assets/local/rojulhe-final-lee-somin.png") center / cover;
+      filter: blur(24px);
+      opacity: 0.46;
+      transform: scale(1.04);
+      pointer-events: none;
+    }
+
+    .poster {
+      width: min(100%, 476px);
+      aspect-ratio: 4961 / 7016;
+      justify-self: end;
+      position: relative;
+      z-index: 1;
+      object-fit: contain;
+      background: rgba(255, 255, 255, 0.92);
+      box-shadow: 0 14px 32px rgba(99, 22, 34, 0.18);
+    }
+
+    .hero-copy {
+      position: relative;
+      z-index: 1;
+      max-width: 480px;
+    }
+
+    h1 {
+      margin: 0 0 18px;
+      font-size: clamp(20px, 2.2vw, 30px);
+      line-height: 1.18;
+      font-weight: 800;
+    }
+
+    .hero-title {
+      font-weight: 700;
+    }
+
+    .hero-meta {
+      margin-top: 28px;
+      opacity: 0.5;
+      font-size: clamp(11px, 0.95vw, 14px);
+      line-height: 1.75;
+      font-weight: 500;
+      word-break: keep-all;
+    }
+
+    .hero-meta.local-reveal.is-revealed {
+      opacity: 0.5;
+    }
+
+    .hero-meta p + p {
+      margin-top: 14px;
+    }
+
+    .hero-meta .hero-meta-group {
+      margin-top: 26px;
+    }
+
+    .hero-meta span {
+      display: inline-block;
+      padding-left: 1.1em;
+    }
+
+    p {
+      margin: 0;
+      font-size: clamp(12px, 1.05vw, 15px);
+      line-height: 1.55;
+    }
+
+    main {
+      min-height: calc(100dvh - 64px);
+    }
+
+    .content {
+      width: min(100%, 980px);
+      margin: 0 auto;
+      padding: clamp(38px, 6vw, 72px) clamp(28px, 7vw, 90px) 96px;
+    }
+
+    .rojulhe-detail {
+      width: 100%;
+      background: #fff;
+      overflow: hidden;
+      font-family: "Noto Sans KR", "Noto Sans CJK KR", "Helvetica Neue", Arial, sans-serif;
+    }
+
+    .rojulhe-inner {
+      width: min(100%, 980px);
+      margin: 0 auto;
+    }
+
+    .rojulhe-white {
+      position: relative;
+      min-height: clamp(2280px, 238vw, 3060px);
+      padding: clamp(34px, 6vw, 78px) clamp(24px, 7vw, 86px) 0;
+      background: #fff;
+      color: #111;
+      overflow: hidden;
+    }
+
+    .rojulhe-title-art {
+      display: block;
+      width: min(58vw, 560px);
+      height: auto;
+      margin: 0 auto clamp(96px, 12vw, 158px);
+      transform: translateX(clamp(8px, 1.2vw, 18px));
+    }
+
+    .rojulhe-vertical-art {
+      position: absolute;
+      top: clamp(184px, 18vw, 284px);
+      left: 50%;
+      width: clamp(260px, 34vw, 410px);
+      height: auto;
+      transform: translateX(-50%);
+      pointer-events: none;
+      z-index: 2;
+    }
+
+    .rojulhe-dot {
+      position: absolute;
+      width: clamp(11px, 1.7vw, 18px);
+      aspect-ratio: 1;
+      border-radius: 50%;
+      background: currentColor;
+    }
+
+    .rojulhe-white .dot-a { left: 10%; top: 20%; }
+    .rojulhe-white .dot-b { left: 47%; top: 36%; }
+    .rojulhe-white .dot-c { right: 10%; top: 55%; }
+    .rojulhe-white .dot-d { display: none; }
+    .rojulhe-white .mobile-dot {
+      display: none;
+    }
+
+    .rojulhe-text-grid {
+      position: relative;
+      min-height: clamp(1800px, 200vw, 2360px);
+      margin-top: clamp(8px, 3vw, 42px);
+    }
+
+    .rojulhe-copy {
+      position: absolute;
+      max-width: 360px;
+      width: 36%;
+      font-size: clamp(10px, 1vw, 13px);
+      font-weight: 400;
+      line-height: 24pt;
+      letter-spacing: -0.02em;
+      word-break: keep-all;
+    }
+
+    .rojulhe-copy.left {
+      left: 0;
+      text-align: left;
+    }
+
+    .rojulhe-copy.right {
+      right: 0;
+      text-align: left;
+    }
+
+    .rojulhe-copy.intro { top: 0; }
+    .rojulhe-copy.family { top: 18%; }
+    .rojulhe-copy.storm { top: 33%; }
+    .rojulhe-copy.hephaestus { top: 50%; }
+    .rojulhe-copy.party { top: 67%; }
+    .rojulhe-copy.finger { top: 82%; }
+
+    .rojulhe-copy h2 {
+      margin: 0 0 12px;
+      font-size: clamp(13px, 1.25vw, 17px);
+      font-weight: 500;
+      line-height: 24pt;
+      letter-spacing: -0.025em;
+    }
+
+    .rojulhe-copy p + p {
+      margin-top: 24px;
+    }
+
+    .rojulhe-small-object {
+      display: block;
+      width: clamp(72px, 10vw, 118px);
+      height: auto;
+      margin: clamp(42px, 7vw, 88px) auto clamp(30px, 8vw, 86px);
+    }
+
+    .rojulhe-emotion-line {
+      margin: clamp(120px, 16vw, 220px) auto 0;
+      text-align: center;
+      font-size: clamp(12px, calc(1vw + 2pt), 15px);
+      font-weight: 400;
+      line-height: 24pt;
+      letter-spacing: -0.02em;
+      color: #111;
+      word-break: keep-all;
+    }
+
+    .rojulhe-beat-dots {
+      display: grid;
+      place-items: center;
+      gap: clamp(18px, 4vw, 46px);
+      margin: clamp(26px, 6vw, 78px) auto;
+      color: #111;
+    }
+
+    .rojulhe-beat-dots span {
+      width: clamp(5px, 0.85vw, 9px);
+      aspect-ratio: 1;
+      border-radius: 50%;
+      background: currentColor;
+      display: block;
+    }
+
+    .rojulhe-stage {
+      width: 100vw;
+      max-width: none;
+      margin: 0 0 -8px 50%;
+      display: block;
+      transform: translateX(-50%);
+    }
+
+    .rojulhe-black {
+      position: relative;
+      margin-top: -4px;
+      background: #000;
+      color: #fff;
+      min-height: clamp(1640px, 158vw, 2100px);
+      padding: clamp(72px, 8vw, 118px) clamp(24px, 7vw, 86px) clamp(320px, 28vw, 460px);
+    }
+
+    .rojulhe-black .rojulhe-dot {
+      background: #fff;
+      color: #fff;
+    }
+
+    .rojulhe-black .dot-a { left: 25%; top: 11%; }
+    .rojulhe-black .dot-b { left: 28%; top: 16%; }
+    .rojulhe-black .dot-c { right: 20%; top: 36%; }
+    .rojulhe-black .dot-d { left: 16%; bottom: 11%; }
+    .rojulhe-black .dot-e { display: none; }
+
+    .rojulhe-black-copy {
+      width: min(78%, 560px);
+      margin: 0 auto;
+      text-align: center;
+      font-size: clamp(9px, 0.95vw, 12px);
+      line-height: 25pt;
+      letter-spacing: -0.015em;
+      word-break: keep-all;
+    }
+
+    .rojulhe-black-copy h2 {
+      position: absolute;
+      top: clamp(-180px, -13vw, -96px);
+      left: 50%;
+      margin: 0;
+      font-size: calc(clamp(9px, 0.95vw, 12px) + 5pt);
+      font-weight: 500;
+      line-height: 1;
+      color: #fff;
+      text-align: center;
+      transform: translateX(-50%);
+      z-index: 2;
+    }
+
+    .rojulhe-black-copy h2 span {
+      display: block;
+      width: 1em;
+      margin: 0 auto 0.82em;
+      text-align: center;
+      transform-origin: center;
+    }
+
+    .rojulhe-black-copy h2 span:nth-child(1) {
+      transform: rotate(0deg);
+    }
+
+    .rojulhe-black-copy h2 span:nth-child(2) {
+      transform: rotate(-9deg);
+    }
+
+    .rojulhe-black-copy h2 span:nth-child(3) {
+      transform: rotate(12deg);
+    }
+
+    .rojulhe-black-copy h2 span:nth-child(4) {
+      transform: rotate(-16deg);
+    }
+
+    .rojulhe-black-copy:first-of-type {
+      padding-top: clamp(300px, 28vw, 430px);
+    }
+
+    .rojulhe-black-copy p + p {
+      margin-top: 25pt;
+    }
+
+    .rojulhe-black-copy .director-gap-large {
+      margin-top: 50pt;
+    }
+
+    .rojulhe-black-copy .director-gap-xlarge {
+      margin-top: 75pt;
+    }
+
+    .rojulhe-black-copy.long {
+      width: min(66%, 620px);
+      margin-top: clamp(160px, 17vw, 230px);
+      text-align: justify;
+      text-align-last: left;
+      line-height: 24pt;
+      columns: 1;
+    }
+
+    .rojulhe-black-copy.long p + p {
+      margin-top: 24pt;
+    }
+
+    .rojulhe-credits {
+      position: absolute;
+      left: clamp(24px, 6vw, 82px);
+      right: clamp(24px, 6vw, 82px);
+      bottom: clamp(44px, 7vw, 92px);
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: clamp(20px, 4vw, 66px);
+      font-size: clamp(8px, 0.78vw, 10px);
+      line-height: 1.95;
+      letter-spacing: -0.01em;
+    }
+
+    .rojulhe-credits dl,
+    .rojulhe-credits dt,
+    .rojulhe-credits dd {
+      margin: 0;
+    }
+
+    .rojulhe-credits .credit-line {
+      display: grid;
+      grid-template-columns: minmax(4.2em, max-content) 1fr;
+      gap: 1em;
+    }
+
+    .rojulhe-credits dt {
+      white-space: nowrap;
+    }
+
+    @media (max-width: 799px) {
+      .rojulhe-inner {
+        width: 100%;
+      }
+
+      .rojulhe-white {
+        min-height: 2520px;
+        padding: 34px 22px 0;
+      }
+
+      .rojulhe-title-art {
+        width: min(78vw, 360px);
+        margin-inline: auto;
+        margin-bottom: 280px;
+        transform: translateX(8px);
+      }
+
+      .rojulhe-vertical-art {
+        width: min(112vw, 424px);
+        left: 50%;
+        right: auto;
+        top: 190px;
+        opacity: 0.7;
+        transform: translateX(-50%);
+      }
+
+      .rojulhe-dot {
+        display: none;
+      }
+
+      .rojulhe-white .mobile-dot {
+        display: block;
+        width: 18px;
+        color: #000;
+        z-index: 3;
+      }
+
+      .rojulhe-white .mobile-dot-left {
+        left: 14%;
+        top: 42%;
+      }
+
+      .rojulhe-white .mobile-dot-right {
+        right: 26%;
+        top: 58%;
+      }
+
+      .rojulhe-text-grid {
+        min-height: auto;
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 56px;
+        margin-top: 46px;
+      }
+
+      .rojulhe-copy,
+      .rojulhe-copy.offset,
+      .rojulhe-copy.left,
+      .rojulhe-copy.right {
+        position: relative;
+        top: auto;
+        left: auto;
+        right: auto;
+        z-index: 4;
+        width: min(44vw, 214px);
+        max-width: 44vw;
+        margin-top: 0;
+        color: #fff;
+        font-size: 10px;
+        line-height: 24pt;
+        mix-blend-mode: difference;
+      }
+
+      .rojulhe-copy.right {
+        justify-self: end;
+      }
+
+      .rojulhe-stage {
+        width: 100vw;
+        max-width: none;
+        margin-left: 50%;
+        transform: translateX(-50%);
+      }
+
+      .rojulhe-black {
+        min-height: 2020px;
+        padding: 82px 22px 150px;
+      }
+
+      .rojulhe-black-copy {
+        width: min(72vw, 330px);
+        font-size: 9px;
+        line-height: 25pt;
+      }
+
+      .rojulhe-black-copy h2 {
+        top: -104px;
+        font-size: 14pt;
+      }
+
+      .rojulhe-black-copy:first-of-type {
+        padding-top: 300px;
+      }
+
+      .rojulhe-black-copy.long {
+        width: min(72vw, 330px);
+        columns: 1;
+        margin-top: 75pt;
+        line-height: 24pt;
+      }
+
+      .rojulhe-credits {
+        grid-template-columns: repeat(2, 1fr);
+        bottom: 46px;
+        left: 22px;
+        right: 22px;
+        gap: 18px 28px;
+        font-size: 8px;
+        line-height: 2.35;
+      }
+    }
+    }
+
+    .intro {
+      display: grid;
+      grid-template-columns: minmax(180px, 1fr) minmax(260px, 2fr);
+      gap: clamp(24px, 4vw, 56px);
+      align-items: start;
+      margin-bottom: clamp(30px, 5vw, 54px);
+    }
+
+    h2 {
+      margin: 0;
+      font-size: clamp(22px, 2.4vw, 34px);
+      line-height: 1.08;
+      font-weight: 800;
+    }
+
+    .swatches {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: clamp(14px, 2vw, 26px);
+      margin: 0 0 clamp(34px, 5vw, 56px);
+    }
+
+    .swatch {
+      aspect-ratio: 1.2;
+      border-radius: 6px;
+      overflow: hidden;
+      background:
+        radial-gradient(circle at 24% 20%, rgba(255,255,255,0.8), transparent 24%),
+        linear-gradient(135deg, rgba(255, 208, 214, 0.94), rgba(200, 226, 110, 0.84));
+    }
+
+    .swatch:nth-child(2) {
+      background:
+        radial-gradient(circle at 50% 50%, transparent 0 28%, rgba(245, 241, 140, 0.78) 29% 31%, transparent 32%),
+        linear-gradient(135deg, #c8c7f5, #d8d9ff);
+    }
+
+    .swatch:nth-child(3) {
+      background:
+        linear-gradient(145deg, rgba(255,255,255,0.25), transparent),
+        radial-gradient(circle at 72% 24%, #e9f1c5, #cbdca1 58%, #eff3cf);
+    }
+
+    .credits {
+      border-top: 1px solid var(--line);
+    }
+
+    .credit-row {
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 18px;
+      align-items: center;
+      padding: 18px 0;
+      border-bottom: 1px solid var(--line);
+      font-size: clamp(18px, 2vw, 28px);
+      font-weight: 800;
+    }
+
+    .credit-row span:last-child {
+      font-size: clamp(11px, 1vw, 14px);
+      color: rgba(0, 0, 0, 0.5);
+      font-weight: 500;
+    }
+
+    .local-reveal {
+      opacity: 0;
+      translate: 0 42px;
+      transition: opacity 720ms ease, translate 720ms cubic-bezier(0.22, 1, 0.36, 1);
+      will-change: opacity, translate;
+    }
+
+    .local-reveal.is-revealed {
+      opacity: 1;
+      translate: 0 0;
+    }
+
+    @media (max-width: 799px) {
+      :root {
+        --header-height: 53px;
+      }
+
+      .page-header {
+        padding: 6px 15px;
+        box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25);
+      }
+
+      .site-logo {
+        width: 172.139px;
+        height: 41px;
+      }
+
+      .menu-button {
+        width: 57px;
+        height: 47px;
+        justify-content: center;
+      }
+
+      .menu-button picture {
+        width: 26px;
+        height: 28px;
+      }
+
+      .local-site-menu {
+        top: 76px;
+        right: 24px;
+        min-width: calc((100vw - 48px) / 2);
+        padding: 8px 0;
+        border-radius: 9px;
+      }
+
+      .local-site-menu a {
+        padding: 10px 14px;
+        font-size: clamp(11px, 1.7vw, 15px);
+      }
+
+      .hero {
+        min-height: 570px;
+        grid-template-columns: 1fr;
+        gap: 24px;
+        justify-items: center;
+        padding: calc(var(--header-height) + 56px) 22px 64px;
+      }
+
+      .poster {
+        justify-self: center;
+        width: min(78.2vw, 306px);
+      }
+
+      .hero-copy {
+        width: min(100%, 320px);
+        text-align: center;
+        align-items: center;
+      }
+
+      .hero-copy h1,
+      .hero-copy p {
+        text-align: center;
+      }
+
+      .hero-meta span {
+        padding-left: 0;
+      }
+
+      .content {
+        padding: 38px 24px 74px;
+      }
+
+      .intro {
+        grid-template-columns: 1fr;
+        gap: 16px;
+      }
+
+      .swatches {
+        grid-template-columns: 1fr;
+        gap: 18px;
+      }
+
+      .swatch {
+        aspect-ratio: 1.45;
+      }
+
+      .credit-row {
+        font-size: 16px;
+        padding: 14px 0;
+      }
+    }
+
+    @media (min-width: 800px) and (max-width: 1279px) {
+      :root {
+        --header-height: 90.29px;
+      }
+
+      .page-header {
+        padding: 11px 20px;
+      }
+
+      .site-logo {
+        width: 269.586px;
+        height: 68.29px;
+      }
+
+      .menu-button picture {
+        width: 37px;
+        height: 41px;
+      }
+
+      .hero {
+        grid-template-columns: minmax(255px, 391px) minmax(300px, 420px);
+        gap: 56px;
+        padding-inline: 48px;
+      }
+
+      .poster {
+        width: min(100%, 357px);
+      }
+
+      .content {
+        width: min(100%, 760px);
+        padding-inline: 48px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header class="page-header">
+    <a class="site-logo" href="index.html" aria-label="홈 페이지 맨 위로 이동">
+      <picture>
+        <source media="(max-width: 799px)" srcset="./_assets/v11/73e2f1aa5a03cabb0de4b7e8e67bae4ef194e954.svg">
+        <source media="(min-width: 800px) and (max-width: 1279px)" srcset="./_assets/v11/dd3dc53a4d552236c0002cbe6c9495bee18867e2.svg">
+        <img src="./_assets/v11/db3ea7af024331ec0eb061d77604a93d44afc47b.svg" alt="로줄 로줄 로줄">
+      </picture>
+    </a>
+    <button class="menu-button" type="button" aria-label="Open menu" aria-controls="local-site-menu" aria-expanded="false">
+      <picture>
+        <source media="(max-width: 799px)" srcset="./_assets/v11/ba967da562803572a2b14614cc0709f6c3005e0b.svg">
+        <source media="(min-width: 800px) and (max-width: 1279px)" srcset="./_assets/v11/58014a1c539bb55816bcba9b504fe69ddfb85005.svg">
+        <img src="./_assets/v11/00a33a0a805cb7c1c94e204426b191f4623bfcc3.svg" alt="">
+      </picture>
+    </button>
+  </header>
+  <nav class="local-site-menu" id="local-site-menu" aria-label="Site menu">
+    <a href="first-performance.html">첫 번째 공연</a>
+    <a href="second-performance.html">두 번째 공연</a>
+    <a href="third-performance.html">세 번째 공연</a>
+    <a href="index.html#schedule">공연 전체 일정</a>
+    <a href="index.html#ticket">티켓 예매</a>
+    <a href="index.html#contact">문의하기</a>
+  </nav>
+
+  <main>
+    <section class="hero" aria-label="첫 번째 공연 소개">
+      <img class="poster local-reveal" src="./_assets/local/rojulhe-final-lee-somin.png" alt="로미오와 줄리엣, 헤파이스토스 포스터">
+      <div class="hero-copy">
+        <h1 class="hero-title local-reveal">로미오와 줄리엣, 헤파이스토스</h1>
+        <p class="local-reveal">혼란 속에서 로미오와 줄리엣은 서로의 눈을 마주보고,<br>그 순간 둘 사이에 설명할 수 없는 감정이 싹튼다.</p>
+        <div class="hero-meta local-reveal" aria-label="공연 정보">
+          <p>• 연출: 장일수</p>
+          <p>• 작: 김동영, 차종민</p>
+          <p class="hero-meta-group">• 공연일시<br>
+            <span>1회차- 6월 4일 (목) 시간 미정</span><br>
+            <span>2회차- 6월 5일 (금) 시간 미정</span><br>
+            <span>3회차- 6월 6일 (토) 시간 미정</span>
+          </p>
+          <p>• 장소: 연극원 상자무대 2</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="rojulhe-detail" aria-label="로미오와 줄리엣, 헤파이스토스 상세 페이지">
+      <div class="rojulhe-inner">
+        <section class="rojulhe-white" aria-label="작품 소개">
+          <img class="rojulhe-title-art local-reveal" src="./_assets/local/rojulhe-title.png" alt="로미오와 줄리엣,">
+          <img class="rojulhe-vertical-art local-reveal" src="./_assets/local/rojulhe-vertical-title.png" alt="헤파이스토스">
+          <span class="rojulhe-dot dot-a" aria-hidden="true"></span>
+          <span class="rojulhe-dot dot-b" aria-hidden="true"></span>
+          <span class="rojulhe-dot dot-c" aria-hidden="true"></span>
+          <span class="rojulhe-dot dot-d" aria-hidden="true"></span>
+          <span class="rojulhe-dot mobile-dot mobile-dot-left" aria-hidden="true"></span>
+          <span class="rojulhe-dot mobile-dot mobile-dot-right" aria-hidden="true"></span>
+
+          <div class="rojulhe-text-grid">
+            <article class="rojulhe-copy left intro local-reveal">
+              <h2>시놉시스</h2>
+              <p>두 가문, 마시모와 다리오는 과거의 잔혹한 사건으로 깊은 상처를 안고 있다.</p>
+              <p>(마시모는 다리오에 의해 코를 잃었고, 다리오는 마시모에게 열 손가락을 잃는다.)</p>
+            </article>
+
+            <article class="rojulhe-copy right family local-reveal">
+              <p>시간이 흐르고, 병에 걸린 다리오는 죽음을 맞이한다. 아들 로미오는 아버지의 유언에 따라 잘린 손가락을 관에 넣어 장례를 치르기 위해 어머니 이사벨과 함께 숲으로 향한다.</p>
+            </article>
+
+            <article class="rojulhe-copy left storm local-reveal">
+              <p>한편, 마시모의 집에서는 다리오의 죽음을 기뻐하며 축제가 벌어진다. 엄마 엘레나와 사촌 티볼트가 춤을 추는 가운데, 딸 줄리엣은 홀로 생각에 잠긴 채 몰래 숲으로 향한다.</p>
+            </article>
+
+            <article class="rojulhe-copy right hephaestus local-reveal">
+              <p>그날 밤, 숲에서는 강한 굉음과 함께 번개가 치고 로미오와 이사벨, 그리고 다리오의 시신이 담긴 관은 뿔뿔이 흩어진다. 한 차례 폭풍이 지나간 뒤, 정체를 알 수 없는 비명 소리가 울려 퍼진다. 그곳에는 올림포스에서 떨어진 헤파이스토스가 고통 속에 쓰러져 있다. 우연히 그를 발견한 로미오는 도움의 손길을 건네고, 헤파이스토스는 그 은혜를 잊지 않겠다며 떠난다.</p>
+              <p>이후, 로미오는 어머니 이사벨의 불안과 집착에 떠밀리듯 꿈속에서 아버지가 서 있었다는 마시모의 집으로 향하고, 그곳에서 열리는 파티에 몰래 잠입한다.</p>
+            </article>
+
+            <article class="rojulhe-copy left party local-reveal">
+              <p>파티장에서 다시 헤파이스토스를 마주한 로미오는 그에게서 “손가락을 찾으러 왔느냐”는 의미심장한 말을 듣는다.</p>
+              <p>그 순간, 마시모는 노래를 멈추고 로미오의 정체를 의심하기 시작한다. 긴장 속에서 로미오의 신분이 드러날 위기에 처하고, 줄리엣은 당황한 채 품에 숨겨두었던 흰 천에 싸인 물건을 떨어뜨린다.</p>
+            </article>
+
+            <article class="rojulhe-copy right finger local-reveal">
+              <p>그것은 로미오가 찾고 있는, 숲에서 잃어버린 아버지 다리오의 잘린 오른 손 검지였다. 혼란 속에서 로미오와 줄리엣은 서로의 눈을 마주보고,</p>
+            </article>
+          </div>
+
+          <p class="rojulhe-emotion-line local-reveal">그 순간 둘 사이에 설명할 수 없는 감정이 싹튼다.</p>
+          <img class="rojulhe-small-object local-reveal" src="./_assets/local/rojulhe-small-object.png" alt="">
+          <div class="rojulhe-beat-dots" aria-hidden="true">
+            <span></span><span></span><span></span><span></span>
+          </div>
+          <img class="rojulhe-stage local-reveal" src="./_assets/local/rojulhe-stage.png" alt="무대 이미지를 점묘로 표현한 흑백 그래픽">
+        </section>
+
+        <section class="rojulhe-black" aria-label="제작 의도와 크레딧">
+          <span class="rojulhe-dot dot-a" aria-hidden="true"></span>
+          <span class="rojulhe-dot dot-b" aria-hidden="true"></span>
+          <span class="rojulhe-dot dot-c" aria-hidden="true"></span>
+          <span class="rojulhe-dot dot-d" aria-hidden="true"></span>
+          <span class="rojulhe-dot dot-e" aria-hidden="true"></span>
+
+          <article class="rojulhe-black-copy local-reveal">
+            <h2><span>연</span><span>출</span><span>의</span><span>도</span></h2>
+            <p>두 가문이 싸운다.</p>
+            <p>왜 싸우는지 아무도 모른다.</p>
+            <p>마시모는 코를 잃고 다리오는 손가락을 잃는다.</p>
+            <p>그렇게 아이들이 태어난다.</p>
+            <p class="director-gap-large">각자의 방식으로 사랑을 표현하고 실패하는 이야기.</p>
+            <p class="director-gap-large">중요한 것은 '실패'가 아니다.</p>
+            <p>'각자의 방식으로'다. 모두 자기 방식으로 했다.</p>
+            <p>아무도 사랑하지 않은 게 아니다.</p>
+            <p class="director-gap-large">그러나 닿지 못했다.</p>
+            <p class="director-gap-xlarge">사랑한다는 것과 사랑이 닿는다는 것은 왜 다른가.</p>
+          </article>
+
+          <article class="rojulhe-black-copy long local-reveal">
+            <p>이 작품은 잔혹동화의 형식을 취하고 있다. 미학적 선택이 아니다. 이 작품이 이미 그 문법으로 쓰여 있기 때문이다. 폭력은 "그랬다"로 끝난다. 신체는 감각을 가진 살이 아니라 교환 가능한 사물이 된다. 죽음과 잠의 경계가 없다. 이 세계 안에 있는 인물들은 이게 이상한 세계라는 걸 모른다. 관객만 그것을 알게 된다.</p>
+            <p>이 작품을 사건이 아니라 현상으로 만들고 싶다. 인과관계와 심리로 이야기를 끌고 가지 않는다. 인물들은 자신이 왜 그런 행동을 하는지 모른 채 한다. 주워담지 못한 채 갈팡질팡한다. 그것이 이 무대 위에서 인물들이 존재하는 방식이다.</p>
+            <p>관객이 이야기를 따라가다 배반당하고, 설명할 수 없는 무언가에 찔리는 경험. 슬프게 만들려고 하지 않는데 슬퍼지는 것. 그것이 이 공연이 선택하는 방식이다.</p>
+          </article>
+
+          <div class="rojulhe-credits local-reveal" aria-label="제작진">
+            <dl>
+              <div class="credit-line"><dt>작</dt><dd>장지혜</dd></div>
+              <div class="credit-line"><dt>연출</dt><dd>신진호</dd></div>
+              <div class="credit-line"><dt>부연출</dt><dd>최태용</dd></div>
+              <div class="credit-line"><dt>조연출</dt><dd>인유빈 한리다</dd></div>
+              <div class="credit-line"><dt>무대감독</dt><dd>인유빈</dd></div>
+              <div class="credit-line"><dt>기획</dt><dd>권나은</dd></div>
+              <div class="credit-line"><dt>프로젝트 기획</dt><dd>조연우</dd></div>
+            </dl>
+            <dl>
+              <div class="credit-line"><dt>무대디자인</dt><dd>김도현</dd></div>
+              <div class="credit-line"><dt>조명디자인</dt><dd>이동현</dd></div>
+              <div class="credit-line"><dt>오브제디자인</dt><dd>육다솔</dd></div>
+              <div class="credit-line"><dt>그래픽디자인</dt><dd>이소민</dd></div>
+              <div class="credit-line"><dt>음향 오퍼레이터</dt><dd>한리다</dd></div>
+              <div class="credit-line"><dt>비주얼·사운드 레퍼런스</dt><dd>성경희</dd></div>
+              <div class="credit-line"><dt>안무</dt><dd>김효경</dd></div>
+            </dl>
+            <dl>
+              <div class="credit-line"><dt>출연</dt><dd>김빛나 김윤서 박상윤 심효민 윤방</dd></div>
+              <div class="credit-line"><dt></dt><dd>이서한 이현우 이혜리 전성환</dd></div>
+              <div class="credit-line"><dt>무대크루</dt><dd>김도윤 김시원 박준형 안경환 유혜린</dd></div>
+            </dl>
+            <dl>
+              <div class="credit-line"><dt>지도교수</dt><dd>강량원</dd></div>
+              <div class="credit-line"><dt>기술감독</dt><dd>임건수</dd></div>
+              <div class="credit-line"><dt>조명감독</dt><dd>홍선화</dd></div>
+              <div class="credit-line"><dt>음향감독</dt><dd>고태현</dd></div>
+              <div class="credit-line"><dt>제작주임</dt><dd>송기선</dd></div>
+              <div class="credit-line"><dt>제작감독</dt><dd>이은혜 이한아</dd></div>
+              <div class="credit-line"><dt>제작</dt><dd>한국예술종합학교 연극원</dd></div>
+            </dl>
+          </div>
+        </section>
+      </div>
+    </section>
+  </main>
+  <script>
+    window.addEventListener("DOMContentLoaded", function () {
+      var menu = document.getElementById("local-site-menu");
+      var button = document.querySelector(".menu-button");
+
+      function closeMenu() {
+        menu.classList.remove("is-open");
+        button.setAttribute("aria-expanded", "false");
+      }
+
+      function showLocalNotice(message, event) {
+        var existing = document.querySelector(".local-notice");
+        if (existing) existing.remove();
+        var notice = document.createElement("div");
+        notice.className = "local-notice";
+        notice.textContent = message;
+        notice.setAttribute("role", "status");
+        var isMobileNotice = window.matchMedia("(max-width: 799px)").matches;
+        var x = event && typeof event.clientX === "number" ? event.clientX : window.innerWidth / 2;
+        var y = event && typeof event.clientY === "number" ? event.clientY : window.innerHeight / 2;
+        function moveNotice(pointerEvent) {
+          if (isMobileNotice) {
+            notice.style.left = "50%";
+            notice.style.top = "50%";
+            notice.style.transform = "translate(-50%, -50%)";
+            return;
+          }
+          var nextX = pointerEvent && typeof pointerEvent.clientX === "number" ? pointerEvent.clientX : x;
+          var nextY = pointerEvent && typeof pointerEvent.clientY === "number" ? pointerEvent.clientY : y;
+          notice.style.left = Math.max(12, Math.min(nextX + 18, window.innerWidth - notice.offsetWidth - 12)) + "px";
+          notice.style.top = Math.max(12, Math.min(nextY + 18, window.innerHeight - notice.offsetHeight - 12)) + "px";
+        }
+        Object.assign(notice.style, {
+          position: "fixed",
+          left: "0",
+          top: "0",
+          zIndex: "20000",
+          transform: "translate(0, 0)",
+          padding: "18px 24px",
+          borderRadius: "10px",
+          background: "rgba(255, 255, 255, 0.4)",
+          color: "#111",
+          boxShadow: "0 10px 32px rgba(0, 0, 0, 0.18)",
+          backdropFilter: "blur(10px)",
+          WebkitBackdropFilter: "blur(10px)",
+          fontFamily: "\"Noto Sans KR:Regular\", \"Inter:Medium\", sans-serif",
+          fontSize: "16px",
+          lineHeight: "1.45",
+          textAlign: "center",
+          pointerEvents: "none"
+        });
+        document.body.appendChild(notice);
+        moveNotice(event);
+        if (!isMobileNotice) document.addEventListener("pointermove", moveNotice);
+        window.setTimeout(function () {
+          notice.style.transition = "opacity 220ms ease";
+          notice.style.opacity = "0";
+        }, 1700);
+        window.setTimeout(function () {
+          if (!isMobileNotice) document.removeEventListener("pointermove", moveNotice);
+          notice.remove();
+        }, 2000);
+      }
+
+      button.addEventListener("click", function (event) {
+        event.preventDefault();
+        event.stopPropagation();
+        var isOpen = menu.classList.toggle("is-open");
+        button.setAttribute("aria-expanded", isOpen ? "true" : "false");
+      });
+
+      menu.addEventListener("click", function (event) {
+        var link = event.target.closest("a");
+        if (!link) return;
+        if (link.getAttribute("href") === "second-performance.html" || link.getAttribute("href") === "third-performance.html") {
+          event.preventDefault();
+          closeMenu();
+          showLocalNotice("오픈 전입니다.", event);
+          return;
+        }
+        closeMenu();
+      });
+
+      document.addEventListener("click", closeMenu);
+      document.addEventListener("keydown", function (event) {
+        if (event.key === "Escape") closeMenu();
+      });
+
+      var revealElements = Array.prototype.slice.call(document.querySelectorAll("main .local-reveal, main .hero .poster, main .hero-copy h1, main .hero-copy p, main img, main h1, main h2, main p, main .swatch, main .credit-row span")).filter(function (element, index, list) {
+        return list.indexOf(element) === index;
+      });
+      var textElements = revealElements.filter(function (element) {
+        return element.matches("h1, h2, p, span");
+      });
+      var fontSizes = textElements.map(function (element) {
+        return Math.round(parseFloat(window.getComputedStyle(element).fontSize) || 0);
+      }).filter(Boolean).sort(function (a, b) {
+        return b - a;
+      }).filter(function (size, index, list) {
+        return list.indexOf(size) === index;
+      });
+      revealElements.forEach(function (element) {
+        var delay = 45;
+        if (element.matches("h1, h2, p, span")) {
+          var fontSize = Math.round(parseFloat(window.getComputedStyle(element).fontSize) || 0);
+          delay = Math.max(fontSizes.indexOf(fontSize), 0) * 90;
+        }
+        element.classList.add("local-reveal");
+        element.style.transitionDelay = delay + "ms";
+      });
+      if (!("IntersectionObserver" in window)) {
+        revealElements.forEach(function (element) {
+          element.classList.add("is-revealed");
+        });
+        return;
+      }
+      var revealObserver = new IntersectionObserver(function (entries) {
+        entries.forEach(function (entry) {
+          if (!entry.isIntersecting) return;
+          entry.target.classList.add("is-revealed");
+          revealObserver.unobserve(entry.target);
+        });
+      }, {
+        threshold: 0.12,
+        rootMargin: "0px 0px -8% 0px"
+      });
+      revealElements.forEach(function (element) {
+        revealObserver.observe(element);
+        var rect = element.getBoundingClientRect();
+        if (rect.top < window.innerHeight && rect.bottom > 0) {
+          window.setTimeout(function () {
+            element.classList.add("is-revealed");
+            revealObserver.unobserve(element);
+          }, 120);
+        }
+      });
+    });
+  </script>
+</body>
+</html>

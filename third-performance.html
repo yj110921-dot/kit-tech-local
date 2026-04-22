@@ -1,0 +1,569 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>로미오와 줄리엣3</title>
+  <style>
+    :root {
+      --ink: #111;
+      --paper: #f7f2f1;
+      --pink: #f3c8cd;
+      --rose: #ec8d98;
+      --line: rgba(0, 0, 0, 0.1);
+      --header-height: 106px;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      margin: 0;
+      color: var(--ink);
+      background: #fff;
+      font-family: "Helvetica Neue", Arial, system-ui, sans-serif;
+      letter-spacing: 0;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    .page-header {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 9999;
+      width: 100%;
+      height: var(--header-height);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 13px 28px;
+      background: rgba(255, 255, 255, 0.2);
+      box-shadow: 0 4px 5px rgba(0, 0, 0, 0.25);
+    }
+
+    .site-logo {
+      display: block;
+      width: 287.485px;
+      height: 74px;
+      cursor: pointer;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    .site-logo picture,
+    .menu-button picture,
+    .site-logo img,
+    .menu-button img {
+      display: block;
+      width: 100%;
+      height: 100%;
+    }
+
+    .menu-button {
+      width: 49px;
+      height: 46px;
+      display: flex;
+      align-items: center;
+      justify-content: flex-end;
+      padding: 0;
+      border: 0;
+      background: transparent;
+      cursor: pointer;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    .menu-button picture {
+      width: 42.275px;
+      height: 46.246px;
+    }
+
+    .local-site-menu {
+      position: fixed;
+      top: 72px;
+      right: clamp(24px, 5vw, 72px);
+      z-index: 10001;
+      display: grid;
+      min-width: min(198px, calc(100vw - 48px));
+      padding: 8px 0;
+      border: 1px solid rgba(0, 0, 0, 0.12);
+      border-radius: 9px;
+      background: rgba(238, 238, 238, 0.96);
+      box-shadow: 2px 4px 4px rgba(0, 0, 0, 0.18);
+      opacity: 0;
+      transform: translateY(-8px);
+      pointer-events: none;
+      transition: opacity 180ms ease, transform 180ms ease;
+      backdrop-filter: blur(10px);
+    }
+
+    .local-site-menu.is-open {
+      opacity: 1;
+      transform: translateY(0);
+      pointer-events: auto;
+    }
+
+    .local-site-menu a {
+      display: block;
+      padding: 11px 18px;
+      color: #111;
+      font-family: "Noto Sans KR:Regular", "Inter:Medium", sans-serif;
+      font-size: clamp(11px, 1.7vw, 15px);
+      line-height: 1.2;
+      letter-spacing: 0;
+      text-align: center;
+      white-space: nowrap;
+    }
+
+    .local-site-menu a:hover,
+    .local-site-menu a:focus-visible {
+      background: #828282;
+      color: #fff;
+      outline: none;
+    }
+
+    .hero {
+      min-height: clamp(430px, 50vw, 680px);
+      display: grid;
+      grid-template-columns: minmax(160px, 300px) minmax(280px, 470px);
+      align-items: center;
+      justify-content: center;
+      gap: clamp(42px, 7vw, 92px);
+      padding: calc(var(--header-height) + clamp(48px, 6vw, 86px)) clamp(28px, 7vw, 110px) clamp(64px, 8vw, 116px);
+      background:
+        linear-gradient(135deg, rgba(255,255,255,0.18) 0 18%, transparent 18% 100%),
+        linear-gradient(35deg, transparent 0 22%, rgba(255,255,255,0.22) 22% 38%, transparent 38% 100%),
+        linear-gradient(115deg, rgba(213, 92, 104, 0.22) 0 16%, transparent 16% 100%),
+        conic-gradient(from 28deg at 20% 35%, #fff4ba, #f4df7e, #fff8d6, #efd26a, #fff1a8, #f7e897, #fff4ba);
+      background-size: 320px 320px, 280px 280px, 360px 360px, cover;
+    }
+
+    .poster {
+      width: min(100%, 260px);
+      aspect-ratio: 1;
+      justify-self: end;
+      object-fit: cover;
+      box-shadow: 0 14px 32px rgba(99, 22, 34, 0.18);
+    }
+
+    .hero-copy {
+      max-width: 480px;
+    }
+
+    h1 {
+      margin: 0 0 18px;
+      font-size: clamp(20px, 2.2vw, 30px);
+      line-height: 1.18;
+      font-weight: 800;
+    }
+
+    p {
+      margin: 0;
+      font-size: clamp(12px, 1.05vw, 15px);
+      line-height: 1.55;
+    }
+
+    main {
+      min-height: calc(100dvh - 64px);
+    }
+
+    .content {
+      width: min(100%, 980px);
+      margin: 0 auto;
+      padding: clamp(38px, 6vw, 72px) clamp(28px, 7vw, 90px) 96px;
+    }
+
+    .intro {
+      display: grid;
+      grid-template-columns: minmax(180px, 1fr) minmax(260px, 2fr);
+      gap: clamp(24px, 4vw, 56px);
+      align-items: start;
+      margin-bottom: clamp(30px, 5vw, 54px);
+    }
+
+    h2 {
+      margin: 0;
+      font-size: clamp(22px, 2.4vw, 34px);
+      line-height: 1.08;
+      font-weight: 800;
+    }
+
+    .swatches {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: clamp(14px, 2vw, 26px);
+      margin: 0 0 clamp(34px, 5vw, 56px);
+    }
+
+    .swatch {
+      aspect-ratio: 1.2;
+      border-radius: 6px;
+      overflow: hidden;
+      background:
+        radial-gradient(circle at 24% 20%, rgba(255,255,255,0.8), transparent 24%),
+        linear-gradient(135deg, rgba(255, 208, 214, 0.94), rgba(200, 226, 110, 0.84));
+    }
+
+    .swatch:nth-child(2) {
+      background:
+        radial-gradient(circle at 50% 50%, transparent 0 28%, rgba(245, 241, 140, 0.78) 29% 31%, transparent 32%),
+        linear-gradient(135deg, #c8c7f5, #d8d9ff);
+    }
+
+    .swatch:nth-child(3) {
+      background:
+        linear-gradient(145deg, rgba(255,255,255,0.25), transparent),
+        radial-gradient(circle at 72% 24%, #e9f1c5, #cbdca1 58%, #eff3cf);
+    }
+
+    .credits {
+      border-top: 1px solid var(--line);
+    }
+
+    .credit-row {
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 18px;
+      align-items: center;
+      padding: 18px 0;
+      border-bottom: 1px solid var(--line);
+      font-size: clamp(18px, 2vw, 28px);
+      font-weight: 800;
+    }
+
+    .credit-row span:last-child {
+      font-size: clamp(11px, 1vw, 14px);
+      color: rgba(0, 0, 0, 0.5);
+      font-weight: 500;
+    }
+
+    .local-reveal {
+      opacity: 0;
+      translate: 0 42px;
+      transition: opacity 720ms ease, translate 720ms cubic-bezier(0.22, 1, 0.36, 1);
+      will-change: opacity, translate;
+    }
+
+    .local-reveal.is-revealed {
+      opacity: 1;
+      translate: 0 0;
+    }
+
+    @media (max-width: 799px) {
+      :root {
+        --header-height: 53px;
+      }
+
+      .page-header {
+        padding: 6px 15px;
+        box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25);
+      }
+
+      .site-logo {
+        width: 172.139px;
+        height: 41px;
+      }
+
+      .menu-button {
+        width: 57px;
+        height: 47px;
+        justify-content: center;
+      }
+
+      .menu-button picture {
+        width: 26px;
+        height: 28px;
+      }
+
+      .local-site-menu {
+        top: 76px;
+        right: 24px;
+        min-width: calc((100vw - 48px) / 2);
+        padding: 8px 0;
+        border-radius: 9px;
+      }
+
+      .local-site-menu a {
+        padding: 10px 14px;
+        font-size: clamp(11px, 1.7vw, 15px);
+      }
+
+      .hero {
+        min-height: 570px;
+        grid-template-columns: 1fr;
+        gap: 24px;
+        justify-items: center;
+        padding: calc(var(--header-height) + 56px) 22px 64px;
+      }
+
+      .poster {
+        justify-self: center;
+        width: min(46vw, 180px);
+      }
+
+      .hero-copy {
+        width: min(100%, 320px);
+      }
+
+      .content {
+        padding: 38px 24px 74px;
+      }
+
+      .intro {
+        grid-template-columns: 1fr;
+        gap: 16px;
+      }
+
+      .swatches {
+        grid-template-columns: 1fr;
+        gap: 18px;
+      }
+
+      .swatch {
+        aspect-ratio: 1.45;
+      }
+
+      .credit-row {
+        font-size: 16px;
+        padding: 14px 0;
+      }
+    }
+
+    @media (min-width: 800px) and (max-width: 1279px) {
+      :root {
+        --header-height: 90.29px;
+      }
+
+      .page-header {
+        padding: 11px 20px;
+      }
+
+      .site-logo {
+        width: 269.586px;
+        height: 68.29px;
+      }
+
+      .menu-button picture {
+        width: 37px;
+        height: 41px;
+      }
+
+      .hero {
+        grid-template-columns: minmax(150px, 230px) minmax(300px, 420px);
+        gap: 56px;
+        padding-inline: 48px;
+      }
+
+      .poster {
+        width: min(100%, 210px);
+      }
+
+      .content {
+        width: min(100%, 760px);
+        padding-inline: 48px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header class="page-header">
+    <a class="site-logo" href="index.html" aria-label="홈 페이지 맨 위로 이동">
+      <picture>
+        <source media="(max-width: 799px)" srcset="./_assets/v11/73e2f1aa5a03cabb0de4b7e8e67bae4ef194e954.svg">
+        <source media="(min-width: 800px) and (max-width: 1279px)" srcset="./_assets/v11/dd3dc53a4d552236c0002cbe6c9495bee18867e2.svg">
+        <img src="./_assets/v11/db3ea7af024331ec0eb061d77604a93d44afc47b.svg" alt="로줄 로줄 로줄">
+      </picture>
+    </a>
+    <button class="menu-button" type="button" aria-label="Open menu" aria-controls="local-site-menu" aria-expanded="false">
+      <picture>
+        <source media="(max-width: 799px)" srcset="./_assets/v11/ba967da562803572a2b14614cc0709f6c3005e0b.svg">
+        <source media="(min-width: 800px) and (max-width: 1279px)" srcset="./_assets/v11/58014a1c539bb55816bcba9b504fe69ddfb85005.svg">
+        <img src="./_assets/v11/00a33a0a805cb7c1c94e204426b191f4623bfcc3.svg" alt="">
+      </picture>
+    </button>
+  </header>
+  <nav class="local-site-menu" id="local-site-menu" aria-label="Site menu">
+    <a href="first-performance.html">첫 번째 공연</a>
+    <a href="second-performance.html">두 번째 공연</a>
+    <a href="third-performance.html">세 번째 공연</a>
+    <a href="index.html#schedule">공연 전체 일정</a>
+    <a href="index.html#ticket">티켓 예매</a>
+    <a href="index.html#contact">문의하기</a>
+  </nav>
+
+  <main>
+    <section class="hero" aria-label="세 번째 공연 소개">
+      <img class="poster" src="./_assets/v11/c63f1e4753d6b06098a7c0f34ae91ac84ea7404b.png" alt="로미오와 줄리엣3 포스터">
+      <div class="hero-copy">
+        <h1>로미오와 줄리엣3</h1>
+        <p>2026 통합 포스터 프로젝트의 첫 번째 공연입니다. 서로 다른 비극의 이미지와 무대의 물성을 겹쳐, 사랑과 균열이 동시에 발생하는 순간을 시각화합니다.</p>
+      </div>
+    </section>
+
+    <section class="content" aria-label="공연 상세 정보">
+      <div class="intro">
+        <h2>Interests and hobbies</h2>
+        <p>Allite secto n roud out the professional proper of this webpage. Wash person little, I really? What do they contain someone to click. 공연 정보와 무대 이미지를 연결해 첫 번째 공연의 분위기를 빠르게 보여줍니다.</p>
+      </div>
+
+      <div class="swatches" aria-hidden="true">
+        <div class="swatch"></div>
+        <div class="swatch"></div>
+        <div class="swatch"></div>
+      </div>
+
+      <div class="credits">
+        <div class="credit-row"><span>Agency name</span><span>2025</span></div>
+        <div class="credit-row"><span>Studio name</span><span>2024</span></div>
+        <div class="credit-row"><span>Company name</span><span>2023</span></div>
+      </div>
+    </section>
+  </main>
+  <script>
+    window.addEventListener("DOMContentLoaded", function () {
+      var menu = document.getElementById("local-site-menu");
+      var button = document.querySelector(".menu-button");
+
+      function closeMenu() {
+        menu.classList.remove("is-open");
+        button.setAttribute("aria-expanded", "false");
+      }
+
+      function showLocalNotice(message, event) {
+        var existing = document.querySelector(".local-notice");
+        if (existing) existing.remove();
+        var notice = document.createElement("div");
+        notice.className = "local-notice";
+        notice.textContent = message;
+        notice.setAttribute("role", "status");
+        var isMobileNotice = window.matchMedia("(max-width: 799px)").matches;
+        var x = event && typeof event.clientX === "number" ? event.clientX : window.innerWidth / 2;
+        var y = event && typeof event.clientY === "number" ? event.clientY : window.innerHeight / 2;
+        function moveNotice(pointerEvent) {
+          if (isMobileNotice) {
+            notice.style.left = "50%";
+            notice.style.top = "50%";
+            notice.style.transform = "translate(-50%, -50%)";
+            return;
+          }
+          var nextX = pointerEvent && typeof pointerEvent.clientX === "number" ? pointerEvent.clientX : x;
+          var nextY = pointerEvent && typeof pointerEvent.clientY === "number" ? pointerEvent.clientY : y;
+          notice.style.left = Math.max(12, Math.min(nextX + 18, window.innerWidth - notice.offsetWidth - 12)) + "px";
+          notice.style.top = Math.max(12, Math.min(nextY + 18, window.innerHeight - notice.offsetHeight - 12)) + "px";
+        }
+        Object.assign(notice.style, {
+          position: "fixed",
+          left: "0",
+          top: "0",
+          zIndex: "20000",
+          transform: "translate(0, 0)",
+          padding: "18px 24px",
+          borderRadius: "10px",
+          background: "rgba(255, 255, 255, 0.4)",
+          color: "#111",
+          boxShadow: "0 10px 32px rgba(0, 0, 0, 0.18)",
+          backdropFilter: "blur(10px)",
+          WebkitBackdropFilter: "blur(10px)",
+          fontFamily: "\"Noto Sans KR:Regular\", \"Inter:Medium\", sans-serif",
+          fontSize: "16px",
+          lineHeight: "1.45",
+          textAlign: "center",
+          pointerEvents: "none"
+        });
+        document.body.appendChild(notice);
+        moveNotice(event);
+        if (!isMobileNotice) document.addEventListener("pointermove", moveNotice);
+        window.setTimeout(function () {
+          notice.style.transition = "opacity 220ms ease";
+          notice.style.opacity = "0";
+        }, 1700);
+        window.setTimeout(function () {
+          if (!isMobileNotice) document.removeEventListener("pointermove", moveNotice);
+          notice.remove();
+        }, 2000);
+      }
+
+      button.addEventListener("click", function (event) {
+        event.preventDefault();
+        event.stopPropagation();
+        var isOpen = menu.classList.toggle("is-open");
+        button.setAttribute("aria-expanded", isOpen ? "true" : "false");
+      });
+
+      menu.addEventListener("click", function (event) {
+        var link = event.target.closest("a");
+        if (!link) return;
+        if (link.getAttribute("href") === "second-performance.html" || link.getAttribute("href") === "third-performance.html") {
+          event.preventDefault();
+          closeMenu();
+          showLocalNotice("오픈 전입니다.", event);
+          return;
+        }
+        closeMenu();
+      });
+
+      document.addEventListener("click", closeMenu);
+      document.addEventListener("keydown", function (event) {
+        if (event.key === "Escape") closeMenu();
+      });
+
+      var revealElements = Array.prototype.slice.call(document.querySelectorAll("main .hero .poster, main .hero-copy h1, main .hero-copy p, main img, main h1, main h2, main p, main .swatch, main .credit-row span")).filter(function (element, index, list) {
+        return list.indexOf(element) === index;
+      });
+      var textElements = revealElements.filter(function (element) {
+        return element.matches("h1, h2, p, span");
+      });
+      var fontSizes = textElements.map(function (element) {
+        return Math.round(parseFloat(window.getComputedStyle(element).fontSize) || 0);
+      }).filter(Boolean).sort(function (a, b) {
+        return b - a;
+      }).filter(function (size, index, list) {
+        return list.indexOf(size) === index;
+      });
+      revealElements.forEach(function (element) {
+        var delay = 45;
+        if (element.matches("h1, h2, p, span")) {
+          var fontSize = Math.round(parseFloat(window.getComputedStyle(element).fontSize) || 0);
+          delay = Math.max(fontSizes.indexOf(fontSize), 0) * 90;
+        }
+        element.classList.add("local-reveal");
+        element.style.transitionDelay = delay + "ms";
+      });
+      if (!("IntersectionObserver" in window)) {
+        revealElements.forEach(function (element) {
+          element.classList.add("is-revealed");
+        });
+        return;
+      }
+      var revealObserver = new IntersectionObserver(function (entries) {
+        entries.forEach(function (entry) {
+          if (!entry.isIntersecting) return;
+          entry.target.classList.add("is-revealed");
+          revealObserver.unobserve(entry.target);
+        });
+      }, {
+        threshold: 0.12,
+        rootMargin: "0px 0px -8% 0px"
+      });
+      revealElements.forEach(function (element) {
+        revealObserver.observe(element);
+        var rect = element.getBoundingClientRect();
+        if (rect.top < window.innerHeight && rect.bottom > 0) {
+          window.requestAnimationFrame(function () {
+            element.classList.add("is-revealed");
+            revealObserver.unobserve(element);
+          });
+        }
+      });
+    });
+  </script>
+</body>
+</html>
