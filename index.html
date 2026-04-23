@@ -1625,6 +1625,39 @@
       });
     }
 
+    function setupFirstPerformanceEntryLinks() {
+      document.querySelectorAll("[data-breakpoint='true']").forEach(function (page) {
+        var title = findTextElement(page, "로미오와 줄리엣, 헤파이스토스");
+        var card = title && title.closest("li");
+        if (!card) return;
+
+        var targets = [];
+        var titleBlock = title.closest(".textContents") || title;
+        var poster = card.querySelector(".local-performance-poster-wrap") || card.querySelector("img.local-performance-poster") || card.querySelector("img");
+        if (titleBlock) targets.push(titleBlock);
+        if (poster) targets.push(poster);
+
+        targets.forEach(function (target) {
+          if (!target || target.dataset.firstPerformanceLinked === "true") return;
+          target.dataset.firstPerformanceLinked = "true";
+          target.style.cursor = "pointer";
+          target.setAttribute("role", "link");
+          target.setAttribute("tabindex", "0");
+          target.setAttribute("aria-label", "로미오와 줄리엣, 헤파이스토스 페이지로 이동");
+          target.addEventListener("click", function (event) {
+            event.preventDefault();
+            window.location.href = "first-performance.html";
+          });
+          target.addEventListener("keydown", function (event) {
+            if (event.key === "Enter" || event.key === " ") {
+              event.preventDefault();
+              window.location.href = "first-performance.html";
+            }
+          });
+        });
+      });
+    }
+
     function createPerformancePoster(kind) {
       var image = document.createElement("img");
       image.src = kind === "third" ? thirdPerformancePosterSrc : secondPerformancePosterSrc;
@@ -2035,6 +2068,7 @@
     setupInstagramLinks();
     setupBookingLinks();
     setupComingSoonButtons();
+    setupFirstPerformanceEntryLinks();
     setupScheduleSections();
     trimAfterScheduleSections();
     setupTicketContactSections();
