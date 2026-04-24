@@ -358,15 +358,22 @@
       margin-top: 24px;
     }
 
+    .rojulhe-emotion-stack {
+      margin: clamp(76px, 11vw, 138px) auto 0;
+      display: grid;
+      justify-items: center;
+      gap: clamp(24px, 4vw, 42px);
+    }
+
     .rojulhe-small-object {
       display: block;
       width: clamp(72px, 10vw, 118px);
       height: auto;
-      margin: clamp(42px, 7vw, 88px) auto clamp(30px, 8vw, 86px);
+      margin: 0 auto;
     }
 
     .rojulhe-emotion-line {
-      margin: clamp(120px, 16vw, 220px) auto 0;
+      margin: 0 auto;
       text-align: center;
       font-size: clamp(12px, calc(1vw + 2pt), 15px);
       font-weight: 400;
@@ -380,7 +387,7 @@
       display: grid;
       place-items: center;
       gap: clamp(18px, 4vw, 46px);
-      margin: clamp(26px, 6vw, 78px) auto;
+      margin: clamp(26px, 6vw, 78px) auto clamp(26px, 6vw, 78px);
       color: #111;
     }
 
@@ -534,6 +541,11 @@
       .rojulhe-white {
         min-height: 2520px;
         padding: 34px 22px 0;
+        background: linear-gradient(to bottom, #fff 0 calc(100% - 150px), #000 calc(100% - 150px) 100%);
+      }
+
+      .rojulhe-white::after {
+        content: none;
       }
 
       .rojulhe-title-art {
@@ -606,16 +618,46 @@
       .rojulhe-stage {
         width: 100vw;
         max-width: none;
-        margin-left: 50%;
+        display: block;
+        margin: 40px 0 -176px 50%;
+        position: relative;
+        z-index: 2;
         transform: translateX(-50%);
       }
 
       .rojulhe-black {
-        min-height: 2020px;
-        padding: 82px 22px 150px;
+        margin-top: -132px;
+        min-height: 2320px;
+        padding: 204px 22px 220px;
+      }
+
+      .rojulhe-black::before {
+        content: "";
+        position: absolute;
+        left: 0;
+        right: 0;
+        top: -18px;
+        height: 36px;
+        background: #000;
+        z-index: 0;
+      }
+
+      .rojulhe-emotion-stack {
+        margin-top: 132px;
+        gap: 48px;
+      }
+
+      .rojulhe-small-object {
+        margin: 10px auto;
+      }
+
+      .rojulhe-beat-dots {
+        margin-top: 48px;
       }
 
       .rojulhe-black-copy {
+        position: relative;
+        z-index: 1;
         width: min(72vw, 330px);
         font-size: 9px;
         line-height: 25pt;
@@ -638,8 +680,9 @@
       }
 
       .rojulhe-credits {
+        z-index: 1;
         grid-template-columns: repeat(2, 1fr);
-        bottom: 46px;
+        bottom: 20px;
         left: 22px;
         right: 22px;
         gap: 18px 28px;
@@ -857,6 +900,22 @@
         width: min(100%, 760px);
         padding-inline: 48px;
       }
+
+      .rojulhe-emotion-stack {
+        margin-top: 28px;
+        gap: 54px;
+      }
+    }
+
+    @media (min-width: 1280px) {
+      .rojulhe-emotion-stack {
+        margin-top: 12px;
+        gap: 64px;
+      }
+
+      .rojulhe-stage {
+        width: 94vw;
+      }
     }
   </style>
 </head>
@@ -921,39 +980,36 @@
           <div class="rojulhe-text-grid">
             <article class="rojulhe-copy left intro local-reveal">
               <h2>시놉시스</h2>
-              <p>두 가문, 마시모와 다리오는 과거의 잔혹한 사건으로 깊은 상처를 안고 있다.</p>
-              <p>(마시모는 다리오에 의해 코를 잃었고, 다리오는 마시모에게 열 손가락을 잃는다.)</p>
+              <p>두 가문,<br>마시모와 다리오는 과거의 잔혹한 사건으로 서로에게 깊은 상처를 남긴다.<br>시간이 흐르고, 병에 걸린 다리오는 죽음을 맞이한다.</p>
             </article>
 
             <article class="rojulhe-copy right family local-reveal">
-              <p>시간이 흐르고, 병에 걸린 다리오는 죽음을 맞이한다. 아들 로미오는 아버지의 유언에 따라 잘린 손가락을 관에 넣어 장례를 치르기 위해 어머니 이사벨과 함께 숲으로 향한다.</p>
+              <p>아들 로미오는 아버지의 유언에 따른 장례를 치르기 위해 어머니 이사벨과 함께 숲으로 향한다. 그 뒤를 마시모의 딸 줄리엣이 몰래 뒤따른다.</p>
             </article>
 
             <article class="rojulhe-copy left storm local-reveal">
-              <p>한편, 마시모의 집에서는 다리오의 죽음을 기뻐하며 축제가 벌어진다. 엄마 엘레나와 사촌 티볼트가 춤을 추는 가운데, 딸 줄리엣은 홀로 생각에 잠긴 채 몰래 숲으로 향한다.</p>
+              <p>그날 밤, 숲에는 강한 굉음과 함께 번개가 치고, 로미오와 이사벨, 그리고 다리오의 시신이 담긴 관은 뿔뿔이 흩어진다. 폭풍이 지나간 뒤, 정체를 알 수 없는 비명 소리가 울려 퍼지고, 그곳에는 대장장이 신 헤파이스토스가 고통 속에 쓰러져 있다. 로미오는 우연히 그를 발견해 도움의 손길을 건네고, 헤파이스토스는 은혜를 잊지 않겠다며 떠난다.</p>
             </article>
 
             <article class="rojulhe-copy right hephaestus local-reveal">
-              <p>그날 밤, 숲에서는 강한 굉음과 함께 번개가 치고 로미오와 이사벨, 그리고 다리오의 시신이 담긴 관은 뿔뿔이 흩어진다. 한 차례 폭풍이 지나간 뒤, 정체를 알 수 없는 비명 소리가 울려 퍼진다. 그곳에는 올림포스에서 떨어진 헤파이스토스가 고통 속에 쓰러져 있다. 우연히 그를 발견한 로미오는 도움의 손길을 건네고, 헤파이스토스는 그 은혜를 잊지 않겠다며 떠난다.</p>
-              <p>이후, 로미오는 어머니 이사벨의 불안과 집착에 떠밀리듯 꿈속에서 아버지가 서 있었다는 마시모의 집으로 향하고, 그곳에서 열리는 파티에 몰래 잠입한다.</p>
+              <p>이후 로미오는 어머니 이사벨의 불안과 집착에 떠밀리듯 마시모의 집으로 향해, 그곳에서 열리는 파티에 몰래 잠입한다.</p>
             </article>
 
             <article class="rojulhe-copy left party local-reveal">
-              <p>파티장에서 다시 헤파이스토스를 마주한 로미오는 그에게서 “손가락을 찾으러 왔느냐”는 의미심장한 말을 듣는다.</p>
-              <p>그 순간, 마시모는 노래를 멈추고 로미오의 정체를 의심하기 시작한다. 긴장 속에서 로미오의 신분이 드러날 위기에 처하고, 줄리엣은 당황한 채 품에 숨겨두었던 흰 천에 싸인 물건을 떨어뜨린다.</p>
-            </article>
-
-            <article class="rojulhe-copy right finger local-reveal">
-              <p>그것은 로미오가 찾고 있는, 숲에서 잃어버린 아버지 다리오의 잘린 오른 손 검지였다. 혼란 속에서 로미오와 줄리엣은 서로의 눈을 마주보고,</p>
+              <p>파티장에서 로미오는 헤파이스토스를 다시 마주하고 마시모는 로미오의 정체를 의심한다.</p>
+              <p>긴장 속에서 그의 신분이 드러날 위기에 처하는 순간 줄리엣은 당황한 채 품에 숨겨두었던 흰 천에 싸인 무언가를 떨어뜨린다.</p>
             </article>
           </div>
 
-          <p class="rojulhe-emotion-line local-reveal">그 순간 둘 사이에 설명할 수 없는 감정이 싹튼다.</p>
-          <img class="rojulhe-small-object local-reveal" src="./_assets/local/rojulhe-small-object.png" alt="">
+          <div class="rojulhe-emotion-stack">
+            <p class="rojulhe-emotion-line local-reveal">혼란 속에서 로미오와 줄리엣은 서로의 눈을 마주보고</p>
+            <img class="rojulhe-small-object local-reveal" src="./_assets/local/ticket-rojulhe-element.png" alt="">
+            <p class="rojulhe-emotion-line local-reveal">그 순간 둘 사이에 설명할 수 없는 감정이 싹튼다.</p>
+          </div>
           <div class="rojulhe-beat-dots" aria-hidden="true">
             <span></span><span></span><span></span><span></span>
           </div>
-          <img class="rojulhe-stage local-reveal" src="./_assets/local/rojulhe-stage.png" alt="무대 이미지를 점묘로 표현한 흑백 그래픽">
+          <img class="rojulhe-stage" data-no-reveal="true" src="./_assets/local/rojulhe-stage.png" alt="무대 이미지를 점묘로 표현한 흑백 그래픽">
         </section>
 
         <section class="rojulhe-black" aria-label="제작 의도와 크레딧">
