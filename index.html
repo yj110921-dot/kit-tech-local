@@ -1278,7 +1278,7 @@
     var menu = document.getElementById("local-site-menu");
     var movingPosterSrc = "./_assets/local/moving-poster.mp4";
     var firstPerformancePosterSrc = "./_assets/local/rojulhe-final-lee-somin.png";
-    var secondPerformancePosterSrc = "./_assets/local/poster-pending-unified.png";
+    var secondPerformancePosterSrc = "./_assets/local/rojul-anim-poster.png";
     var thirdPerformancePosterSrc = "./_assets/local/poster-pending-unified.png";
     var instagramUrl = "https://www.instagram.com/karts_rojul?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw%3D%3D";
     var firstBookingUrl = "https://booking.naver.com/booking/12/bizes/224803/items/7612173";
@@ -1706,7 +1706,9 @@
           wrap.innerHTML = "";
           wrap.classList.add("local-performance-poster-pending");
           wrap.appendChild(createPerformancePoster(config.kind));
-          wrap.insertAdjacentHTML("beforeend", '<span class="local-poster-overlay" data-no-reveal="true">포스터 준비중</span>');
+          if (config.kind === "third") {
+            wrap.insertAdjacentHTML("beforeend", '<span class="local-poster-overlay" data-no-reveal="true">포스터 준비중</span>');
+          }
         });
       });
     }

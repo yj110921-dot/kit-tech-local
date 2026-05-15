@@ -131,30 +131,50 @@
     }
 
     .hero {
+      position: relative;
+      overflow: hidden;
       min-height: clamp(430px, 50vw, 680px);
       display: grid;
-      grid-template-columns: minmax(160px, 300px) minmax(280px, 470px);
+      grid-template-columns: minmax(272px, 510px) minmax(280px, 470px);
       align-items: center;
       justify-content: center;
       gap: clamp(42px, 7vw, 92px);
       padding: calc(var(--header-height) + clamp(48px, 6vw, 86px)) clamp(28px, 7vw, 110px) clamp(64px, 8vw, 116px);
       background:
+        linear-gradient(rgba(231, 242, 189, 0.72), rgba(231, 242, 189, 0.72)),
         linear-gradient(135deg, rgba(255,255,255,0.18) 0 18%, transparent 18% 100%),
         linear-gradient(35deg, transparent 0 22%, rgba(255,255,255,0.22) 22% 38%, transparent 38% 100%),
-        linear-gradient(115deg, rgba(213, 92, 104, 0.22) 0 16%, transparent 16% 100%),
+        linear-gradient(115deg, rgba(213, 92, 104, 0.18) 0 16%, transparent 16% 100%),
         conic-gradient(from 28deg at 20% 35%, #e7f2bd, #c9df84, #f2f7d8, #b8d86f, #edf5c8, #d7eaa0, #e7f2bd);
-      background-size: 320px 320px, 280px 280px, 360px 360px, cover;
+      background-size: cover, 320px 320px, 280px 280px, 360px 360px, cover;
+      background-position: center;
+    }
+
+    .hero::before {
+      content: "";
+      position: absolute;
+      inset: -40px;
+      background: url("./_assets/local/rojul-anim-poster.png") center / cover;
+      filter: blur(24px);
+      opacity: 0.38;
+      transform: scale(1.04);
+      pointer-events: none;
     }
 
     .poster {
-      width: min(100%, 260px);
-      aspect-ratio: 1;
+      width: min(100%, 476px);
+      aspect-ratio: 4961 / 7016;
       justify-self: end;
-      object-fit: cover;
+      position: relative;
+      z-index: 1;
+      object-fit: contain;
+      background: rgba(255, 255, 255, 0.92);
       box-shadow: 0 14px 32px rgba(99, 22, 34, 0.18);
     }
 
     .hero-copy {
+      position: relative;
+      z-index: 1;
       max-width: 480px;
     }
 
@@ -163,6 +183,72 @@
       font-size: clamp(20px, 2.2vw, 30px);
       line-height: 1.18;
       font-weight: 800;
+    }
+
+    .hero-title {
+      font-weight: 700;
+    }
+
+    .hero-lead {
+      margin: 0 0 20px;
+      font-size: clamp(12px, calc(1vw + 2pt), 15px);
+      font-weight: 400;
+      line-height: 24pt;
+      letter-spacing: -0.02em;
+      color: #111;
+      word-break: keep-all;
+    }
+
+    .hero-meta {
+      margin-top: 28px;
+      opacity: 0.5;
+      font-size: clamp(11px, 0.95vw, 14px);
+      line-height: 1.75;
+      font-weight: 500;
+      word-break: keep-all;
+    }
+
+    .hero-meta.local-reveal.is-revealed {
+      opacity: 0.5;
+    }
+
+    .hero-meta p + p {
+      margin-top: 14px;
+    }
+
+    .hero-meta .hero-meta-group {
+      margin-top: 26px;
+    }
+
+    .hero-meta span {
+      display: inline-block;
+      padding-left: 1.1em;
+    }
+
+    .hero-booking-button {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-width: clamp(78px, 7vw, 104px);
+      min-height: clamp(29px, 2.7vw, 38px);
+      margin-top: 22px;
+      padding: 8px 18px;
+      border: 0;
+      border-radius: 8px;
+      background: #424242;
+      color: #ffffff;
+      font-family: "Noto Sans KR:Regular", "Noto Sans KR", sans-serif;
+      font-size: clamp(11px, 0.95vw, 14px);
+      line-height: 1;
+      text-decoration: none;
+      cursor: pointer;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    .hero-booking-button:hover,
+    .hero-booking-button:focus-visible {
+      background: #828282;
+      outline: none;
     }
 
     p {
@@ -303,20 +389,33 @@
       }
 
       .hero {
-        min-height: 570px;
+        min-height: 650px;
         grid-template-columns: 1fr;
-        gap: 24px;
+        gap: 0;
         justify-items: center;
-        padding: calc(var(--header-height) + 56px) 22px 64px;
+        padding: calc(var(--header-height) + 64px) 22px 82px;
       }
 
       .poster {
         justify-self: center;
-        width: min(46vw, 180px);
+        width: min(70vw, 276px);
+        margin-top: -64px;
       }
 
       .hero-copy {
         width: min(100%, 320px);
+        margin-top: 54px;
+        text-align: center;
+        align-items: center;
+      }
+
+      .hero-copy h1,
+      .hero-copy p {
+        text-align: center;
+      }
+
+      .hero-meta span {
+        padding-left: 0;
       }
 
       .content {
@@ -363,13 +462,13 @@
       }
 
       .hero {
-        grid-template-columns: minmax(150px, 230px) minmax(300px, 420px);
+        grid-template-columns: minmax(255px, 391px) minmax(300px, 420px);
         gap: 56px;
         padding-inline: 48px;
       }
 
       .poster {
-        width: min(100%, 210px);
+        width: min(100%, 357px);
       }
 
       .content {
@@ -407,10 +506,21 @@
 
   <main>
     <section class="hero" aria-label="두 번째 공연 소개">
-      <img class="poster" src="./_assets/v11/f5b149c01166682e902da877d6466161724946fe.png" alt="로미오와 줄리엣 아님 포스터">
+      <img class="poster local-reveal" src="./_assets/local/rojul-anim-poster.png" alt="로미오와 줄리엣 아님 포스터">
       <div class="hero-copy">
-        <h1>로미오와 줄리엣 아님</h1>
-        <p>2026 통합 포스터 프로젝트의 첫 번째 공연입니다. 서로 다른 비극의 이미지와 무대의 물성을 겹쳐, 사랑과 균열이 동시에 발생하는 순간을 시각화합니다.</p>
+        <h1 class="hero-title local-reveal">로미오와 줄리엣 아님</h1>
+        <p class="hero-lead local-reveal">베로나,<br>몬태규와 캐풀릿 두 가문이 서로 반목 중이다.</p>
+        <div class="hero-meta local-reveal" aria-label="공연 정보">
+          <p>• 연출: 장일수</p>
+          <p>• 작: 김동영 차종민</p>
+          <p class="hero-meta-group">• 공연일시<br>
+            <span>1회차- 6월 4일 (목) 20:00</span><br>
+            <span>2회차- 6월 5일 (금) 20:00</span><br>
+            <span>3회차- 6월 6일 (토) 16:00</span>
+          </p>
+          <p>• 장소: 연극원 상자무대2</p>
+        </div>
+        <button class="hero-booking-button" type="button" aria-label="로미오와 줄리엣 아님 예매 준비중 안내 보기">예매하기</button>
       </div>
     </section>
 
@@ -521,7 +631,15 @@
         if (event.key === "Escape") closeMenu();
       });
 
-      var revealElements = Array.prototype.slice.call(document.querySelectorAll("main .hero .poster, main .hero-copy h1, main .hero-copy p, main img, main h1, main h2, main p, main .swatch, main .credit-row span")).filter(function (element, index, list) {
+      var heroBookingButton = document.querySelector(".hero-booking-button");
+      if (heroBookingButton) {
+        heroBookingButton.addEventListener("click", function (event) {
+          event.preventDefault();
+          showLocalNotice("예매 준비중", event);
+        });
+      }
+
+      var revealElements = Array.prototype.slice.call(document.querySelectorAll("main .hero .poster, main .hero-copy h1, main .hero-meta, main .hero-copy p, main img, main h1, main h2, main p, main .swatch, main .credit-row span")).filter(function (element, index, list) {
         return list.indexOf(element) === index;
       });
       var textElements = revealElements.filter(function (element) {
